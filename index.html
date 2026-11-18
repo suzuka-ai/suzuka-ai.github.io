@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>suzuka — PORTFOLIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F4F1E6;--bg-alt:#ECE7D5;--card:#FDFCF6;--ink:#2C352A;--ink-soft:#5A6655;--ink-mute:#8A9281;--sage:#7A8F6F;--sage-deep:#5F7557;--sage-light:#B8C7AB;--line:#D9D3BE;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:"Noto Sans JP",sans-serif;font-size:15px;line-height:1.8;letter-spacing:.02em;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none}
+  nav{position:sticky;top:0;z-index:50;background:rgba(244,241,230,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:1180px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .logo b{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:600;letter-spacing:.14em;color:var(--sage-deep)}
+  .logo small{font-size:10px;letter-spacing:.3em;color:var(--ink-mute);margin-top:4px;display:block}
+  .nav-links{display:flex;gap:28px;font-size:13px;color:var(--ink-soft)}
+  .nav-links a:hover{color:var(--sage-deep)}
+  .nav-cta{padding:8px 18px;background:var(--sage-light);border-radius:999px;font-size:13px;color:var(--sage-deep);font-weight:500;}
+  .nav-cta:hover{background:var(--sage);color:#fff}
+  section{padding:88px 32px;max-width:1180px;margin:0 auto}
+  .eyebrow{font-size:11px;letter-spacing:.3em;color:var(--sage-deep);display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+  .eyebrow::before{content:"";width:40px;height:1px;background:var(--sage)}
+  h2.title{font-family:"Noto Serif JP",serif;font-size:40px;font-weight:600;line-height:1.3;color:var(--ink);margin-bottom:12px;}
+  .lead{color:var(--ink-soft);max-width:560px;font-size:14px;line-height:1.9}
+  .hero{padding-top:72px;padding-bottom:120px;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
+  .hero-left h1{font-family:"Cormorant Garamond",serif;font-size:92px;font-weight:500;line-height:1;color:var(--sage-deep);margin:12px 0 8px;letter-spacing:.02em;}
+  .hero-left .role{font-size:11px;letter-spacing:.4em;color:var(--ink-mute);margin-left:4px;margin-bottom:28px;}
+  .hero-bio{font-size:14px;line-height:2;color:var(--ink-soft);max-width:460px;margin-bottom:34px}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{padding:12px 26px;border-radius:999px;font-size:13px;letter-spacing:.08em;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;gap:8px;transition:all .2s;}
+  .btn-primary{background:var(--sage);color:#fff}
+  .btn-primary:hover{background:var(--sage-deep)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--sage);color:var(--sage-deep)}
+  .hero-right{display:flex;flex-direction:column;gap:14px}
+  .sns-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 24px;display:flex;align-items:center;gap:18px;transition:all .25s;}
+  .sns-card:hover{border-color:var(--sage-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(122,143,111,.08)}
+  .sns-icon{width:44px;height:44px;border-radius:12px;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--sage-deep);}
+  .sns-body{flex:1;min-width:0}
+  .sns-label{font-size:10px;letter-spacing:.25em;color:var(--ink-mute);margin-bottom:4px}
+  .sns-handle{font-weight:600;color:var(--ink);font-size:15px;margin-bottom:2px}
+  .sns-note{font-size:12px;color:var(--ink-soft)}
+  .sns-arrow{color:var(--ink-mute);flex-shrink:0}
+  .ornament{display:flex;align-items:center;justify-content:center;gap:18px;padding:0 32px;color:var(--sage-light);}
+  .ornament hr{flex:1;border:none;border-top:1px solid var(--line)}
+  .platforms{background:var(--bg-alt);margin:0;max-width:none;padding-left:32px;padding-right:32px}
+  .platforms-inner{max-width:1180px;margin:0 auto}
+  .platforms-head,.worlds-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:48px}
+  .plat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .plat-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;display:flex;flex-direction:column;}
+  .plat-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .plat-dot{width:8px;height:8px;border-radius:50%;background:var(--sage)}
+  .plat-name{font-weight:700;font-size:17px;letter-spacing:.04em}
+  .plat-desc{font-size:13px;color:var(--ink-soft);line-height:1.8;margin-bottom:22px;flex:1}
+  .plat-code-box{background:var(--bg);border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;}
+  .plat-code-label{font-size:10px;letter-spacing:.25em;color:var(--ink-mute);margin-bottom:3px}
+  .plat-code-val{font-family:"Cormorant Garamond",serif;font-size:16px;font-weight:600;letter-spacing:.1em;color:var(--ink)}
+  .copy-btn{background:var(--sage-light);color:var(--sage-deep);border:none;padding:7px 12px;border-radius:999px;font-size:11px;cursor:pointer;transition:background .2s;}
+  .copy-btn:hover{background:var(--sage);color:#fff}
+  .plat-visit{text-align:center;padding:10px;border:1px solid var(--line);border-radius:12px;font-size:12px;color:var(--ink-soft);transition:all .2s;}
+  .plat-visit:hover{border-color:var(--sage);color:var(--sage-deep);background:var(--bg)}
+  .worlds-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .world-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:32px;display:flex;flex-direction:column;transition:all .3s;position:relative;overflow:hidden;}
+  .world-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage-light),var(--sage));opacity:0;transition:opacity .3s;}
+  .world-card:hover{border-color:var(--sage-light);transform:translateY(-3px);box-shadow:0 12px 32px rgba(122,143,111,.1)}
+  .world-card:hover::before{opacity:1}
+  .world-meta{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:10px;letter-spacing:.2em;color:var(--sage-deep);flex-wrap:wrap}
+  .world-meta .dot{width:4px;height:4px;border-radius:50%;background:var(--sage)}
+  .world-title{font-family:"Noto Serif JP",serif;font-size:24px;font-weight:600;line-height:1.4;color:var(--ink);margin-bottom:6px;}
+  .world-subtitle{font-size:12px;color:var(--ink-mute);letter-spacing:.1em;margin-bottom:18px;font-family:"Cormorant Garamond",serif;font-style:italic}
+  .world-desc{font-size:13px;color:var(--ink-soft);line-height:2;margin-bottom:22px;flex:1}
+  .world-stats{display:flex;gap:16px;margin-bottom:20px;font-size:11px;color:var(--ink-mute);letter-spacing:.08em;}
+  .world-chars{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+  .char-chip{padding:5px 11px;background:var(--bg);border-radius:999px;font-size:11px;color:var(--ink-soft);letter-spacing:.04em;border:1px solid transparent;transition:all .2s;}
+  a.char-chip:hover{border-color:var(--sage-light);color:var(--sage-deep);background:var(--card)}
+  .world-cta-row{display:flex;gap:0;margin:0 -32px -32px;}
+  .world-cta{flex:1;padding:18px 24px;background:var(--bg-alt);font-size:12px;color:var(--sage-deep);letter-spacing:.1em;display:flex;align-items:center;justify-content:space-between;transition:background .2s;}
+  .world-cta:only-child{border-radius:0 0 22px 22px}
+  .world-cta:first-child:not(:only-child){border-radius:0 0 0 22px;border-right:1px solid var(--line)}
+  .world-cta:last-child:not(:only-child){border-radius:0 0 22px 0}
+  .world-cta:hover{background:var(--sage-light)}
+  .world-cta.detail{background:var(--card)}
+  .world-cta.detail:hover{background:var(--bg-alt)}
+  .wip-badge{display:inline-block;padding:3px 9px;background:var(--bg-alt);border-radius:999px;font-size:10px;color:var(--ink-mute);letter-spacing:.15em;}
+  footer{background:var(--bg-alt);padding:60px 32px 40px;margin-top:40px;border-top:1px solid var(--line);}
+  .footer-inner{max-width:1180px;margin:0 auto;text-align:center}
+  .footer-logo{font-family:"Cormorant Garamond",serif;font-size:28px;color:var(--sage-deep);letter-spacing:.14em;margin-bottom:12px}
+  .footer-note{font-size:12px;color:var(--ink-mute);letter-spacing:.1em}
+  @media(max-width:860px){section{padding:60px 22px}.hero{grid-template-columns:1fr;gap:40px;padding-bottom:70px}.hero-left h1{font-size:68px}.platforms-head,.worlds-head{grid-template-columns:1fr;gap:20px}.plat-grid{grid-template-columns:1fr}.worlds-grid{grid-template-columns:1fr}h2.title{font-size:30px}.nav-links{display:none}.nav-inner{padding:16px 22px}}
+  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--sage-deep);color:#fff;padding:10px 22px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:all .3s;z-index:100;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><b>PORTFOLIO</b><small>— suzuka —</small></div>
+    <div class="nav-links">
+      <a href="#home">ホーム</a><a href="#platforms">プラットフォーム</a><a href="#worlds">作品</a><a href="#profile">プロフィール</a>
+    </div>
+    <a href="https://wavebox.me/" target="_blank" class="nav-cta">お問い合わせ</a>
+  </div>
+</nav>
+
+<section id="home" class="hero">
+  <div class="hero-left">
+    <div class="eyebrow">個人創作アーカイブ</div>
+    <h1>suzuka</h1>
+    <div class="role">CREATOR ・ WRITER ・ WORLDBUILDER</div>
+    <p class="hero-bio">世界観とキャラクター、そして物語を綴る創作アカウント。<br>オリジナルの世界観・キャラクター・物語、そしてAIチャットシミュレーターを、いくつかの場所で公開しています。<br>まずは、いちばん気軽につながれる場所からあそびに来てください。</p>
+    <div class="hero-ctas"><a href="#worlds" class="btn btn-primary">作品アーカイブを見る →</a><a href="#platforms" class="btn btn-ghost">活動場所を見る</a></div>
+  </div>
+  <div class="hero-right">
+    <a href="https://x.com/sumapen" target="_blank" class="sns-card">
+      <div class="sns-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+      <div class="sns-body"><div class="sns-label">X ( TWITTER )</div><div class="sns-handle">@sumapen</div><div class="sns-note">新作情報・進捗・日々のつぶやき</div></div>
+      <div class="sns-arrow">↗</div>
+    </a>
+    <a href="https://wavebox.me/" target="_blank" class="sns-card">
+      <div class="sns-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <div class="sns-body"><div class="sns-label">WAVEBOX</div><div class="sns-handle">suzuka's Wavebox</div><div class="sns-note">ご意見・ご感想・リクエストはこちらから</div></div>
+      <div class="sns-arrow">↗</div>
+    </a>
+  </div>
+</section>
+
+<div class="ornament"><hr><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="12" r="1.5" opacity=".5"/><circle cx="20" cy="12" r="1.5" opacity=".5"/></svg><hr></div>
+
+<section id="platforms" class="platforms">
+  <div class="platforms-inner">
+    <div class="platforms-head">
+      <div><div class="eyebrow">活動プラットフォーム</div><h2 class="title">いろいろな場所で、<br>創作しています。</h2></div>
+      <p class="lead">各プラットフォームの招待コードから登録すると、わたしの作品を見つけやすくなります。コードはワンタップでコピーできます。</p>
+    </div>
+    <div class="plat-grid">
+      <div class="plat-card">
+        <div class="plat-top"><span class="plat-dot"></span><span class="plat-name">Plaitoon</span></div>
+        <p class="plat-desc">女性向けのノベルゲームやチャットシミュレーターを投稿しているメイン活動場所。日本人クリエイターのフォロワー1位を頂いています。</p>
+        <div class="plat-code-box"><div><div class="plat-code-label">紹介コード</div><div class="plat-code-val">9B8E4E0C</div></div><button class="copy-btn" onclick="copyCode('9B8E4E0C')">📋 コピー</button></div>
+        <a href="https://www.plaitoon.com/" target="_blank" class="plat-visit">ページを開く ↗</a>
+      </div>
+      <div class="plat-card">
+        <div class="plat-top"><span class="plat-dot"></span><span class="plat-name">Tikita</span></div>
+        <p class="plat-desc">女性向けのストーリー作品を中心に公開している創作プラットフォーム。ファンタジー系の新作を展開中。</p>
+        <div class="plat-code-box"><div><div class="plat-code-label">紹介コード</div><div class="plat-code-val">T4093M</div></div><button class="copy-btn" onclick="copyCode('T4093M')">📋 コピー</button></div>
+        <a href="https://tikita.com/" target="_blank" class="plat-visit">ページを開く ↗</a>
+      </div>
+      <div class="plat-card">
+        <div class="plat-top"><span class="plat-dot"></span><span class="plat-name">CAVEDUCK</span></div>
+        <p class="plat-desc">オリジナルキャラクターとのチャットを楽しめるプラットフォーム。過去作のアーカイブと一部新作を公開しています。</p>
+        <div class="plat-code-box"><div><div class="plat-code-label">紹介コード</div><div class="plat-code-val">JYV0CD8BkF</div></div><button class="copy-btn" onclick="copyCode('JYV0CD8BkF')">📋 コピー</button></div>
+        <a href="https://caveduck.io/" target="_blank" class="plat-visit">ページを開く ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="worlds">
+  <div class="worlds-head">
+    <div><div class="eyebrow">作品アーカイブ ・ WORLD VIEW</div><h2 class="title">物語の棲む、<br>九つの世界。</h2></div>
+    <p class="lead">ひとつの世界観に、複数の作品とキャラクターたち。気になる世界があれば、各シリーズのページへ飛んでいけます。世界観詳細ページは順次追加予定。</p>
+  </div>
+
+  <div class="worlds-grid">
+
+    <div class="world-card">
+      <div class="world-meta"><span class="dot"></span>FANTASY ・ PIRATES</div>
+      <h3 class="world-title">Pirates of Grand Mer</h3>
+      <div class="world-subtitle">— 大魔海（グラン・メール）</div>
+      <p class="world-desc">カーディア大陸の法も国境も届かない無法の海。魔法なきこの世界で頼れるのは、己の武力と船の性能だけ。逃げ延びた罪人、夢想家、亡霊たちが、それぞれの船に居場所を見出している。前日譚小説『金の目の蝮』も展開中。</p>
+      <div class="world-stats"><span>作品 5本</span><span>・</span><span>総会話 18.3K</span></div>
+      <div class="world-chars">
+        <a href="https://www.plaitoon.com/characters/7ecea537-146b-4f43-a1ae-a534d1609d3e" target="_blank" class="char-chip">ゼクス</a>
+        <a href="https://www.plaitoon.com/characters/b28060e8-1c50-4a28-9001-dfed6f53f54a" target="_blank" class="char-chip">マルセル</a>
+        <a href="https://www.plaitoon.com/characters/be007fea-4f54-46cd-8077-62967af29c9b" target="_blank" class="char-chip">ルーヴェン</a>
+        <a href="https://www.plaitoon.com/characters/23ca70ea-79d5-42f8-b733-5f0bf18197e7" target="_blank" class="char-chip">カイエン</a>
+      </div>
+      <div class="world-cta-row">
+        <a href="https://www.plaitoon.com/characters/61fa9469-cfe3-426a-a3a5-d00571fb471c" target="_blank" class="world-cta">シリーズを始める <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="world-card">
+      <div class="world-meta"><span class="dot"></span>OMEGAVERSE ・ MILITARY</div>
+      <h3 class="world-title">Valtreich Chronik</h3>
+      <div class="world-subtitle">— ヴァルトライヒ軍</div>
+      <p class="world-desc">ヒート期を短縮し、兵の継続戦闘力を担保するため、番制度が軍規に追加された軍。オメガバース×軍の濃密な群像シリーズ。</p>
+      <div class="world-stats"><span>作品 8本</span><span>・</span><span>総会話 23.3K</span></div>
+      <div class="world-chars">
+        <a href="https://www.plaitoon.com/characters/adf4d6b0-97a3-442d-8eda-fe409eaa10d9" target="_blank" class="char-chip">レヴァル</a>
+        <a href="https://www.plaitoon.com/characters/f4066145-c3bd-43f8-b565-eea2f11e5ab8" target="_blank" class="char-chip">ヴォルフ</a>
+        <a href="https://www.plaitoon.com/characters/9c0d80cc-db40-4679-87c8-9b07ea3541da" target="_blank" class="char-chip">ミハイル</a>
+        <a href="https://www.plaitoon.com/characters/ca7c987d-6f5d-41cc-93d6-87f308c77ec9" target="_blank" class="char-chip">エリク</a>
+        <a href="https://www.plaitoon.com/characters/662ebf55-17e3-4699-8277-da303e91a655" target="_blank" class="char-chip">カーレル</a>
+      </div>
+      <div class="world-cta-row">
+        <a href="https://www.plaitoon.com/characters/673eca86-7304-4a05-99df-78167587f9ce" target="_blank" class="world-cta">シリーズを始める <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="world-card">
+      <div class="world-meta"><span class="dot"></span>MODERN ・ LUXURY</div>
+      <h3 class="world-title">THE ASCEND TOWER</h3>
+      <div class="world-subtitle">— 天空の超高級タワー</div>
+      <p class="world-desc">成功者だけが住むことを許された、天空の超高級タワー『ザ・アセンド』。富こそが正義。種族は問われない――求められるのは莫大な資産だけ。欲望と格差が交差する、閉ざされた楽園。</p>
+      <div class="world-stats"><span>作品 5本</span><span>・</span><span>総会話 23.7K</span></div>
+      <div class="world-chars">
+        <a href="https://www.plaitoon.com/characters/1fe64f83-fa9b-4e4a-a9d4-95e0f9e10546" target="_blank" class="char-chip">ガルム</a>
+        <a href="https://www.plaitoon.com/characters/90d14e8c-5a81-4fc4-a79f-93b26897d431" target="_blank" class="char-chip">イアン</a>
+        <a href="https://www.plaitoon.com/characters/fd40c4c5-3dcc-417b-9c0e-8b21722ebae3" target="_blank" class="char-chip">マテオ</a>
+        <a href="https://www.plaitoon.com/characters/991309b5-4828-461f-a599-299638128024" target="_blank" class="char-chip">ルーファス</a>
+        <a href="https://www.plaitoon.com/characters/efcf51d7-ead7-4490-b845-7ac814d1abd7" target="_blank" class="char-chip">カルロ</a>
+      </div>
+      <div class="world-cta-row">
+        <a href="https://www.plaitoon.com/characters/1fe64f83-fa9b-4e4a-a9d4-95e0f9e10546" target="_blank" class="world-cta">シリーズを始める <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="world-card">
+      <div class="world-meta"><span class="dot"></span>MODERN ・ BEASTMEN</div>
+      <h3 class="world-title">野生回帰プロジェクト</h3>
+      <div class="world-subtitle">— Back to the Wild</div>
+      <p class="world-desc">準人類（獣人）たちに権利を。人に飼われ支配される彼らに自由を――という運動が高まりを見せている、現代風社会で生きる準人類と人間のあれこれ。</p>
+      <div class="world-stats"><span>作品 3本</span><span>・</span><span>総会話 507回</span></div>
+      <div class="world-chars">
+        <a href="https://www.plaitoon.com/characters/dbda698f-c1b7-4d89-b141-c5fddb2c1015" target="_blank" class="char-chip">あなたの人魚</a>
+        <a href="https://www.plaitoon.com/characters/93cca4d7-b60d-4462-b396-0d2ce6fb26f9" target="_blank" class="char-chip">ロコ</a>
+        <a href="https://www.plaitoon.com/characters/b9421188-67a6-4a97-a02a-f11605e03c00" target="_blank" class="char-chip">むぎ</a>
+      </div>
+      <div class="world-cta-row">
+        <a href="https://www.plaitoon.com/characters/dbda698f-c1b7-4d89-b141-c5fddb2c1015" target="_blank" class="world-cta">シリーズを始める <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="world-card">
+      <div class="world-meta"><span class="dot"></span>DARK FANTASY ・ MARKET</div>
+      <h3 class="world-title">魔界商都『ゾル・ヴァルガ』</h3>
+      <div class="world-subtitle">— The Blackmarket of Zol-Varga</div>
+      <p class="world-desc">魔界の中層に位置する巨大な商業都市。常に薄暗い紫色の空に覆われ、魔力を含んだ雨が降る街は、あらゆる「商品」が集まる欲望の掃き溜めであり、同時に最高級の贅沢品が取引される場所。</p>
+      <div class="world-stats"><span>作品 5本</span><span>・</span><span>総会話 8.8K</span></div>
+      <div class="world-chars">
+        <a href="https://www.plaitoon.com/characters/75f5ab7d-d539-4001-b40d-bada1e5a8f4b" target="_blank" class="char-chip">ヴァルツ</a>
+        <a href="https://www.plaitoon.com/characters/1dd60497-c0b0-4a5f-84b2-30294e4a685c" target="_blank" class="char-chip">モーリス</a>
+        <a href="https://www.plaitoon.com/characters/cd84b460-68c4-46a7-a9ac-4bd125fb22b1" target="_blank" class="char-chip">アラク</a>
+        <a href="https://www.plaitoon.com/characters/1bdc3c36-d94a-44a3-b8b6-c120d69c3ca7" target="_blank" class="char-chip">名もなき蛾</a>
+        <a href="https://www.plaitoon.com/characters/d2d9843e-f122-4771-9b40-33b7f24251b6" target="_blank" class="char-chip">ザフィ</a>
+      </div>
+      <div class="world-cta-row">
+        <a href="https://www.plaitoon.com/characters/75f5ab7d-d539-4001-b40d-bada1e5a8f4b" target="_blank" class="world-cta">シリーズを始める <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="world-card">
+      <div class="world-meta"><span class="dot"></span>SCI-FI ・ MEDICAL</div>
+      <h3 class="world-title">ヒートロット</h3>
+      <div class="world-subtitle">— 発情症候群 / 国立第七隔離医療センター</div>
+      <p class="world-desc">2040年代の惑星エルデ。体内で「発情細胞」が増殖する原因不明の疾患――通称ヒートロット。治療薬もワクチンも存在せず、唯一の治療法は希少な「抗体キャリア」から抗体因子を受け取ること。</p>
+      <div class="world-stats"><span>作品 3本</span><span>・</span><span>総会話 3.1K</span></div>
+      <div class="world-chars">
+        <a href="https://www.plaitoon.com/characters/d7a3e641-7ee7-4c36-9efd-72d46e80b7b0" target="_blank" class="char-chip">ミラ</a>
+        <a href="https://www.plaitoon.com/characters/13437e1b-c808-4547-b1c7-8430c0d89318" target="_blank" class="char-chip">ヴォルカー</a>
+        <a href="https://www.plaitoon.com/characters/8f74002a-5eb3-407e-a53b-9c5f89031fad" target="_blank" class="char-chip">セイル</a>
+      </div>
+      <div class="world-cta-row">
+        <a href="https://www.plaitoon.com/characters/d7a3e641-7ee7-4c36-9efd-72d46e80b7b0" target="_blank" class="world-cta">シリーズを始める <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="world-card">
+      <div class="world-meta"><span class="dot"></span>HIGH FANTASY ・ MARRIAGE <span class="wip-badge">順次拡張中</span></div>
+      <h3 class="world-title">MARCHÉ.MARIAGE</h3>
+      <div class="world-subtitle">— 大陸魔法評議会公認・婚姻マーケット</div>
+      <p class="world-desc">魔法発達から数千年経った世界。上流階級の婚姻は血統・能力・魔力量が最優先。会員制マーケットの「売り手タブ」からの購入、マッチングタブでの出会い、結婚後の夫婦関係改善プログラム――制度と、その外側に生まれる関係を描くシリーズ。</p>
+      <div class="world-stats"><span>複数作品展開中</span></div>
+      <div class="world-chars">
+        <span class="char-chip">リシェル・シュネヴァルト</span>
+        <span class="char-chip">ミラン・コツル</span>
+        <span class="char-chip">カイロン・ドゥマール</span>
+        <span class="char-chip">ゼノン</span>
+        <span class="char-chip">夫婦再生シリーズ</span>
+      </div>
+      <div class="world-cta-row">
+        <a href="https://www.plaitoon.com/" target="_blank" class="world-cta">作品を探す <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="world-card">
+      <div class="world-meta"><span class="dot"></span>LOW FANTASY ・ BEASTMEN POLITICS <span class="wip-badge">順次拡張中</span></div>
+      <h3 class="world-title">カラフ大森林</h3>
+      <div class="world-subtitle">— 深き腹の森</div>
+      <p class="world-desc">肉食獣人ドラウ族が治める深い森と、服属する獣人部族たちの内政シリーズ。魔法も外敵もない世界で、森主への陳情・年貢・部族ごとの掟と係争だけで世界が回る。利害と裁定の物語。</p>
+      <div class="world-stats"><span>複数作品展開中</span></div>
+      <div class="world-chars">
+        <span class="char-chip">森主陳情シミュ</span>
+        <span class="char-chip">ニサール（贄の兎）</span>
+        <span class="char-chip">ガイル</span>
+      </div>
+      <div class="world-cta-row">
+        <a href="https://www.plaitoon.com/" target="_blank" class="world-cta">作品を探す <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="world-card">
+      <div class="world-meta"><span class="dot"></span>MODERN ・ DARK ROMANCE <span class="wip-badge">順次拡張中</span></div>
+      <h3 class="world-title">中華マフィアシリーズ</h3>
+      <div class="world-subtitle">— The Silent Captivity</div>
+      <p class="world-desc">現代中国南部を舞台に、感情の回路が人より少ない組織の当主たちと、囚われた{{user}}の心理サドシリーズ。監禁執着、借金ゲーム「蜘蛛の糸」、南方の密室――穏やかな笑顔の下で、静かに逃げ場が塞がれていく。</p>
+      <div class="world-stats"><span>複数作品展開中</span></div>
+      <div class="world-chars">
+        <span class="char-chip">謝 黎明（リーミン）</span>
+        <span class="char-chip">霍 凌修（リンシウ）</span>
+        <span class="char-chip">張 明煦（ミンシュ）</span>
+      </div>
+      <div class="world-cta-row">
+        <a href="https://www.plaitoon.com/" target="_blank" class="world-cta">作品を探す <span>→</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer id="profile">
+  <div class="footer-inner">
+    <div class="footer-logo">suzuka</div>
+    <div class="footer-note">© 2026 suzuka. All works &amp; worldbuilding by @sumapen.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">コードをコピーしました</div>
+
+<script>
+function copyCode(code){
+  navigator.clipboard.writeText(code).then(()=>{
+    const t=document.getElementById('toast');
+    t.textContent='「'+code+'」をコピーしました';
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),1800);
+  });
+}
+</script>
+
+</body>
+</html>
