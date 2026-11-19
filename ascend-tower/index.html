@@ -46,6 +46,20 @@ nav{position:sticky;top:0;z-index:40;background:rgba(250,251,247,.94);backdrop-f
 .hero{padding:clamp(28px,5vw,64px) clamp(16px,4vw,32px) clamp(48px,7vw,90px);background:radial-gradient(var(--line) 1px,transparent 1.4px) 0 0/18px 18px}
 .card{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.25fr;background:var(--white);box-shadow:0 2px 0 var(--line),0 30px 50px -30px rgba(28,43,34,.35);transform:rotate(-.6deg);position:relative}
 /* letter = self-introduction */
+.pk{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px);margin-top:clamp(28px,4vw,44px)}
+.pk-card{background:var(--white);box-shadow:0 2px 0 var(--line),0 24px 40px -28px rgba(28,43,34,.35);display:flex;flex-direction:column;transition:transform .25s}
+.pk-card:hover{transform:translateY(-4px)}
+.pk-pic{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--g3)}
+.pk-pic img{width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(#000 70%,transparent 100%);mask-image:linear-gradient(#000 70%,transparent 100%)}
+.pk-no{position:absolute;left:14px;bottom:10px;font:600 10px var(--n);letter-spacing:.25em;color:var(--white);background:var(--ink);padding:3px 9px}
+.pk-body{padding:14px 18px 16px;display:flex;flex-direction:column;flex:1}
+.pk-name{font:900 16px/1.5 var(--m)}
+.pk-body p{font-size:12.5px;line-height:1.9;color:var(--ink2);margin-top:6px;flex:1}
+.pk-foot{font:600 10px var(--n);letter-spacing:.2em;color:var(--g);text-align:right;margin-top:10px}
+.pk-all{text-align:center;margin-top:clamp(28px,4vw,40px)}
+.pk-all a{display:inline-block;font:600 11px var(--n);letter-spacing:.25em;color:var(--white);background:var(--g);padding:12px 26px}
+@media(max-width:1000px){.pk{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.pk{grid-template-columns:1fr}}
 .lt-wrap{padding:0 clamp(16px,4vw,32px) clamp(56px,8vw,90px)}
 .letter{max-width:940px;margin:0 auto;display:grid;grid-template-columns:110px 1fr;gap:clamp(18px,3vw,36px);align-items:center;background:var(--white) repeating-linear-gradient(transparent 0 31px,var(--g3) 31px 32px);padding:clamp(24px,3.4vw,40px) clamp(20px,3.6vw,44px);box-shadow:0 2px 0 var(--line),0 24px 40px -28px rgba(28,43,34,.35);transform:rotate(.4deg);position:relative;border-top:4px solid transparent;border-image:repeating-linear-gradient(-45deg,var(--g) 0 10px,transparent 10px 16px,var(--sky) 16px 26px,transparent 26px 32px) 4}
 .l-side{position:relative}
