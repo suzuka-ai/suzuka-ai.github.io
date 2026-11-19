@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pirates of Grand Mer | suzuka.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,600;0,800;0,900;1,800&family=Overpass+Mono:wght@400;600&family=Zen+Old+Mincho:wght@600;900&family=Zen+Kaku+Gothic+New:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR:wght@600;900&family=Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --paper:#FAFBF7;--white:#FFFFFF;--ink:#1C2B22;--ink2:#4A5A50;--mute:#8E9B93;
+  --g:#3E8B5A;--g2:#A9CDB2;--g3:#E5F1E7;--sky:#5FA8D3;--sky2:#DCEEF8;--red:#C8553D;--line:#DCE4DC;
+  --s:"Overpass",sans-serif;--n:"Overpass Mono",monospace;--m:"Zen Old Mincho",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;font-size:14px;line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+html[lang=ko]{--m:"Noto Serif KR",serif}html[lang=ko] body{font-family:"Noto Sans KR",sans-serif}
+html[lang=zh-Hant]{--m:"Noto Serif TC",serif}html[lang=zh-Hant] body{font-family:"Noto Sans TC",sans-serif}
+img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.lang{display:flex;border:1px solid var(--line);background:var(--white)}
+.lang button{border:none;background:none;cursor:pointer;font:600 10px var(--n);letter-spacing:.05em;color:var(--ink2);padding:5px 8px}
+.lang button + button{border-left:1px solid var(--line)}
+.lang button.on{background:var(--g);color:var(--white)}
+.nav-r{display:flex;align-items:center;gap:26px}
+
+/* airmail edge */
+.air{height:10px;background:repeating-linear-gradient(-45deg,var(--g) 0 14px,var(--white) 14px 22px,var(--sky) 22px 36px,var(--white) 36px 44px)}
+
+/* NAV = route line */
+nav{position:sticky;top:0;z-index:40;background:rgba(250,251,247,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1200px;margin:0 auto;padding:12px clamp(16px,4vw,32px);display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font:900 20px var(--s);letter-spacing:.02em}
+.brand i{color:var(--g);font-style:normal}
+.route{position:relative;display:flex;gap:34px}
+.route::before{content:"";position:absolute;left:8px;right:8px;top:6px;height:3px;background:var(--g);border-radius:2px}
+.route a{position:relative;padding-top:18px;font:600 10px var(--n);letter-spacing:.18em;color:var(--ink2);text-align:center}
+.route a::before{content:"";position:absolute;top:0;left:50%;width:15px;height:15px;margin-left:-7.5px;border-radius:50%;background:var(--white);border:3px solid var(--g);box-sizing:border-box}
+.route a:hover{color:var(--g)}
+.route a:hover::before{background:var(--g)}
+
+/* HERO = postcard */
+.hero{padding:clamp(28px,5vw,64px) clamp(16px,4vw,32px) clamp(48px,7vw,90px);background:radial-gradient(var(--line) 1px,transparent 1.4px) 0 0/18px 18px}
+.card{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.25fr;background:var(--white);box-shadow:0 2px 0 var(--line),0 30px 50px -30px rgba(28,43,34,.35);transform:rotate(-.6deg);position:relative}
+/* letter = self-introduction */
+.pk{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px);margin-top:clamp(28px,4vw,44px)}
+.pk-card{background:var(--white);box-shadow:0 2px 0 var(--line),0 24px 40px -28px rgba(28,43,34,.35);display:flex;flex-direction:column;transition:transform .25s}
+.pk-card:hover{transform:translateY(-4px)}
+.pk-pic{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--g3)}
+.pk-pic img{width:100%;height:100%;object-fit:cover;object-position:center top;-webkit-mask-image:linear-gradient(#000 70%,transparent 100%);mask-image:linear-gradient(#000 70%,transparent 100%)}
+.pk-no{position:absolute;left:14px;bottom:10px;font:600 10px var(--n);letter-spacing:.25em;color:var(--white);background:var(--ink);padding:3px 9px}
+.pk-body{padding:14px 18px 16px;display:flex;flex-direction:column;flex:1}
+.pk-name{font:900 16px/1.5 var(--m)}
+.pk-body p{font-size:12.5px;line-height:1.9;color:var(--ink2);margin-top:6px;flex:1}
+.pk-foot{font:600 10px var(--n);letter-spacing:.2em;color:var(--g);text-align:right;margin-top:10px}
+.pk-all{text-align:center;margin-top:clamp(28px,4vw,40px)}
+.pk-all a{display:inline-block;font:600 11px var(--n);letter-spacing:.25em;color:var(--white);background:var(--g);padding:12px 26px}
+@media(max-width:1000px){.pk{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.pk{grid-template-columns:1fr}}
+.lt-wrap{padding:0 clamp(16px,4vw,32px) clamp(56px,8vw,90px)}
+.letter{max-width:940px;margin:0 auto;display:grid;grid-template-columns:110px 1fr;gap:clamp(18px,3vw,36px);align-items:center;background:var(--white) repeating-linear-gradient(transparent 0 31px,var(--g3) 31px 32px);padding:clamp(24px,3.4vw,40px) clamp(20px,3.6vw,44px);box-shadow:0 2px 0 var(--line),0 24px 40px -28px rgba(28,43,34,.35);transform:rotate(.4deg);position:relative;border-top:4px solid transparent;border-image:repeating-linear-gradient(-45deg,var(--g) 0 10px,transparent 10px 16px,var(--sky) 16px 26px,transparent 26px 32px) 4}
+.l-side{position:relative}
+.l-side .stamp-wrap{position:static;width:96px;height:116px}
+.l-side .stamp-img{background-size:86%}
+.l-side .postmark{top:66px;right:-30px;left:auto;width:74px;height:74px}
+.l-body small.l-lab{display:block;font:600 10px var(--n);letter-spacing:.35em;color:var(--g);margin-bottom:10px}
+.l-body h2{font:900 clamp(20px,2.4vw,26px)/1.5 var(--m);margin-bottom:10px}
+.l-body p{font-size:14px;line-height:32px;color:var(--ink2)}
+.l-food{display:flex;flex-wrap:wrap;gap:0 16px}
+.l-food li{list-style:none;font:600 14px/32px var(--m)}
+.l-food li::before{content:"#";font:700 13px var(--n);color:var(--g);margin-right:3px}
+.l-food .etc{font:italic 800 13px/32px var(--s);color:var(--mute)}
+.l-food .etc::before{content:none}
+.l-note{border-top:1px dashed var(--g2)}
+.l-note b{display:block;font:700 13px/32px var(--m);color:var(--g)}
+.l-note ul{list-style:none}
+.l-note li{font-size:12.5px;line-height:32px;color:var(--ink2);padding-left:1.3em;position:relative}
+.l-note li::before{content:"※";position:absolute;left:0;color:var(--red)}
+.back{position:relative;padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.pc-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.pc-head b{font:800 13px var(--s);letter-spacing:.5em}
+.pc-head span{font:600 11px var(--m);letter-spacing:.3em;color:var(--mute)}
+.stamp-wrap{position:absolute;top:clamp(18px,2.6vw,30px);right:clamp(18px,2.6vw,30px);width:86px;height:104px}
+.stamp{width:100%;height:100%;padding:5px;background:radial-gradient(circle,transparent 3px,var(--white) 3.4px) -5px -5px/10px 10px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+.stamp-in{width:100%;height:100%;background:var(--white);padding:4px;display:flex;flex-direction:column}
+.stamp-img{flex:1;background:var(--white) center/82% no-repeat;border:1px solid var(--g2)}
+.stamp-v{font:800 9px var(--n);letter-spacing:.12em;color:var(--g);text-align:center;padding-top:3px}
+.postmark{position:absolute;top:clamp(40px,4vw,52px);right:clamp(78px,8vw,96px);width:96px;height:96px;color:var(--red);opacity:.7;transform:rotate(-14deg);pointer-events:none}
+.postmark text{font-family:var(--n);font-weight:600}
+.wave{position:absolute;top:clamp(58px,5.4vw,70px);right:clamp(150px,15vw,178px);width:110px;height:50px;color:var(--red);opacity:.55;pointer-events:none}
+.sender{margin-top:clamp(70px,9vw,120px)}
+.sender small{display:block;font:600 10px var(--n);letter-spacing:.3em;color:var(--mute);margin-bottom:4px}
+.sender h1{font:900 clamp(56px,7vw,96px)/.95 var(--s);letter-spacing:-.03em}
+.sender h1 i{font-style:normal;color:var(--g)}
+.sender p{font:600 11px var(--n);letter-spacing:.3em;color:var(--g);margin-top:10px}
+.addr{margin-top:auto;padding-top:28px}
+.addr a{display:grid;grid-template-columns:34px 82px 1fr 18px;align-items:center;gap:10px;padding:11px 0;border-bottom:1.5px dashed var(--line);transition:.2s}
+.addr a:first-child{border-top:1.5px dashed var(--line)}
+.addr a:hover{background:var(--g3);padding-left:8px}
+.addr .ic{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center}
+.addr .lb{font:600 10px var(--n);letter-spacing:.2em;color:var(--mute)}
+.addr .hd{font:700 15px var(--s);letter-spacing:.02em}
+.addr .ar{color:var(--g);font-weight:700}
+.front{position:relative;min-height:clamp(380px,46vw,600px);overflow:hidden}
+.front img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% center;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 22%);mask-image:linear-gradient(to right,transparent 0,#000 22%)}
+.front-cap{position:absolute;right:14px;bottom:12px;font:600 10px var(--n);letter-spacing:.25em;color:var(--white);text-shadow:0 1px 4px rgba(0,0,0,.5)}
+
+/* station sign heading */
+.sec{padding:clamp(56px,8vw,100px) clamp(16px,4vw,32px)}
+.sec-in{max-width:1200px;margin:0 auto}
+.sign{max-width:620px;margin:0 auto clamp(36px,5vw,56px);background:var(--white);border:1px solid var(--line);box-shadow:0 14px 26px -18px rgba(28,43,34,.35);text-align:center}
+.sign-top{display:flex;justify-content:center;align-items:center;gap:12px;padding:18px 16px 4px}
+.sign-no{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:44px;height:44px;border:3px solid var(--g);border-radius:8px;font:900 15px/1 var(--s)}
+.sign-no small{font:600 8px var(--n);letter-spacing:.1em;color:var(--g)}
+.sign-name{font:900 clamp(36px,6vw,64px)/1 var(--s);letter-spacing:.02em}
+.sign-jp{font:900 15px var(--m);letter-spacing:.5em;color:var(--ink2);padding:6px 0 16px}
+.sign-bar{display:flex;justify-content:space-between;align-items:center;background:var(--g);color:var(--white);padding:9px 16px;font:600 11px var(--n);letter-spacing:.15em}
+.sign-bar a:hover{text-decoration:underline}
+.sign-bar span{opacity:.7}
+
+/* PLATFORMS = tickets */
+.plat{background:var(--g3)}
+.tix{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tk{position:relative;display:flex;min-height:190px;filter:drop-shadow(0 10px 14px rgba(28,43,34,.12));transition:.25s;
+  background:radial-gradient(circle at calc(100% - 50px) 0,var(--g3) 10px,transparent 10.5px),radial-gradient(circle at calc(100% - 50px) 100%,var(--g3) 10px,transparent 10.5px),
+  repeating-linear-gradient(45deg,rgba(62,139,90,.07) 0 2px,transparent 2px 7px),repeating-linear-gradient(-45deg,rgba(95,168,211,.07) 0 2px,transparent 2px 7px),#F3F9F4}
+.tk:hover{transform:translateY(-3px)}
+.tk-main{flex:1;min-width:0;padding:16px 18px;display:flex;flex-direction:column}
+.tk-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--g2);padding-bottom:6px}
+.tk-top b{font:900 16px var(--m);letter-spacing:.4em}
+.tk-top span{font:600 10px var(--n);letter-spacing:.15em;color:var(--mute)}
+.tk-route{display:flex;align-items:baseline;gap:8px;margin:12px 0 4px;flex-wrap:wrap}
+.tk-route .fr{font:600 12px var(--n)}
+.tk-route .ha{font:900 12px var(--m)}
+.tk-route .to{font:900 clamp(24px,2.6vw,30px)/1 var(--s);letter-spacing:.01em}
+.tk-arrow{height:2px;background:var(--g);position:relative;margin:6px 0 12px;width:60%}
+.tk-arrow::after{content:"";position:absolute;right:-2px;top:-4px;border-left:9px solid var(--g);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.tk-code{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tk-code small{display:block;font:600 9px var(--n);letter-spacing:.2em;color:var(--mute)}
+.tk-code b{font:600 16px var(--n);letter-spacing:.12em}
+.tk-code button{border:1.5px solid var(--g);background:var(--white);color:var(--g);font:600 10px var(--n);letter-spacing:.15em;padding:6px 10px;cursor:pointer;transition:.15s}
+.tk-code button:hover{background:var(--g);color:var(--white)}
+.tk-stub{flex:0 0 50px;border-left:2px dashed var(--g2);display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;font:800 11px var(--s);letter-spacing:.35em;color:var(--g);transition:.2s}
+.tk-stub:hover{background:var(--g);color:var(--white)}
+
+/* WORLD VIEW: route map index */
+.map{position:relative;overflow-x:auto;margin:0 0 clamp(36px,5vw,56px);padding:4px 0 10px}
+.map-in{position:relative;display:flex;justify-content:space-between;min-width:960px;padding:0 10px}
+.map-in::before{content:"";position:absolute;left:24px;right:24px;top:9px;height:4px;background:linear-gradient(90deg,var(--g) 0 88%,transparent 88%),repeating-linear-gradient(90deg,var(--g2) 0 8px,transparent 8px 14px);border-radius:2px}
+.st{position:relative;min-width:72px;text-align:center;padding-top:30px;white-space:nowrap}
+.st::before{content:"";position:absolute;top:0;left:50%;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:var(--white);border:4px solid var(--g);box-sizing:border-box;transition:.2s}
+.st:hover::before{background:var(--g)}
+.st b{display:block;font:900 11px var(--s);color:var(--g);letter-spacing:.05em}
+.st span{display:block;font:600 11px/1.4 var(--m);letter-spacing:-.02em;color:var(--ink2);margin-top:2px}
+.st.soon::before{border-style:dashed;border-color:var(--mute)}
+.st.soon b{color:var(--mute)}
+
+/* WORLD cards = postcards from each country */
+.worlds{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,32px)}
+.wc{position:relative;display:flex;flex-direction:column;background:var(--white);box-shadow:0 2px 0 var(--line),0 18px 30px -22px rgba(28,43,34,.4);transition:.3s;scroll-margin-top:90px}
+a.wc:hover{transform:translateY(-4px) rotate(-.3deg)}
+.wc-pic{position:relative;height:clamp(170px,19vw,210px);overflow:hidden;
+  background:repeating-radial-gradient(circle at var(--cx) var(--cy),transparent 0 15px,rgba(62,139,90,.22) 15px 16px),linear-gradient(135deg,var(--c1),var(--c2))}
+.wc-pic{height:clamp(200px,22vw,250px)}
+.wc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(#000 58%,transparent 100%);mask-image:linear-gradient(#000 58%,transparent 100%)}
+.wc-pic::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(transparent,var(--white))}
+.wc-dest{position:absolute;left:16px;bottom:10px;z-index:2;background:var(--ink);color:var(--white);font:600 10px var(--n);letter-spacing:.2em;padding:4px 10px}
+.wc-genre{position:absolute;left:16px;top:16px;z-index:2;font:800 11px var(--s);letter-spacing:.2em;color:var(--ink);background:rgba(255,255,255,.9);padding:3px 9px}
+.wc .stamp-wrap{top:14px;right:16px;width:70px;height:84px;z-index:2}
+.wc .stamp-in{align-items:center;justify-content:center;border:1.5px solid var(--g)}
+.wc .stamp-in b{font:900 28px/1 var(--s);color:var(--g)}
+.wc .stamp-in small{font:600 7px var(--n);letter-spacing:.15em;color:var(--ink2);margin-top:4px}
+.wc .postmark{top:44px;right:62px;width:84px;height:84px;z-index:3;color:var(--red);opacity:.95;filter:drop-shadow(0 0 .6px #fff) drop-shadow(0 0 .6px #fff) drop-shadow(0 0 .6px #fff)}
+.wc-body{padding:18px 20px 16px;display:flex;flex-direction:column;flex:1}
+.wc-name{font:900 clamp(19px,2.2vw,24px)/1.4 var(--m);letter-spacing:.05em}
+.wc-en{font:italic 800 13px var(--s);color:var(--g);letter-spacing:.04em;margin-top:2px}
+html[lang=en] .wc-en.dup{display:none}
+.wc-desc{font-size:12.5px;line-height:2;color:var(--ink2);margin:12px 0 14px;flex:1}
+.wc-res{display:flex;align-items:flex-start;gap:12px;border-top:1px dashed var(--line);padding-top:12px}
+.wc-res > small{flex:0 0 auto;font:600 9px/2.3 var(--n);letter-spacing:.2em;color:var(--mute)}
+.wc-res ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 14px}
+.wc-res li{font:600 12.5px var(--m);display:flex;align-items:center;gap:6px}
+.wc-res li::before{content:"#";font:700 12px var(--n);color:var(--g)}
+.wc-foot{display:flex;justify-content:flex-end;margin-top:14px;font:800 11px var(--s);letter-spacing:.25em;color:var(--g)}
+.wc-foot.off{color:var(--mute)}
+/* uncharted */
+.wc.soon{background:transparent;box-shadow:none;border:2px dashed var(--g2)}
+.wc.soon .wc-pic{background:repeating-radial-gradient(circle at 40% 60%,transparent 0 15px,rgba(142,155,147,.18) 15px 16px),var(--white)}
+.unch{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
+.unch span{border:3px double var(--red);color:var(--red);font:900 22px var(--s);letter-spacing:.3em;padding:6px 16px;transform:rotate(-8deg);opacity:.75}
+
+footer{text-align:center;padding:40px 16px 46px}
+footer .term{display:inline-block;background:var(--white);border:1px solid var(--line);padding:14px 40px 0;min-width:260px}
+footer .term small{font:600 10px var(--n);letter-spacing:.3em;color:var(--mute)}
+footer .term b{display:block;font:900 30px var(--s);letter-spacing:.02em}
+footer .term b i{font-style:normal;color:var(--g)}
+footer .term div{background:var(--g);color:var(--white);font:600 10px var(--n);letter-spacing:.3em;margin:10px -40px 0;padding:6px}
+.toast{background:var(--ink);color:var(--white);font-family:var(--n)}
+
+@media(max-width:1000px){.tix{grid-template-columns:1fr 1fr}.tix .tk:last-child{grid-column:1/-1}}
+@media(max-width:780px){
+  .route{gap:20px}.route a{font-size:9px;letter-spacing:.1em}
+  .card{grid-template-columns:1fr;transform:none}
+  .front{order:-1;min-height:300px}
+  .front img{-webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent);mask-image:linear-gradient(to bottom,#000 70%,transparent)}
+  .back{border-right:none}
+  .sender{margin-top:96px}
+  .tix{grid-template-columns:1fr}.tix .tk:last-child{grid-column:auto}
+  .worlds{grid-template-columns:1fr}
+}
+@media(max-width:640px){.letter{grid-template-columns:1fr;transform:none}.l-side{height:110px}.l-side .stamp-wrap{width:92px;height:110px}.l-side .postmark{top:20px;left:84px;right:auto;width:80px;height:80px}}
+@media(max-width:480px){.route{display:none}.lang button{padding:5px 6px;font-size:9px}.addr a{grid-template-columns:30px 70px 1fr 14px}.addr .hd{font-size:14px}}
+
+.a-hero{max-width:1240px;margin:0 auto;padding:clamp(20px,3vw,36px) clamp(12px,3vw,28px) 0}
+.a-map{position:relative;border:10px solid var(--white);box-shadow:0 2px 0 var(--line),0 40px 60px -40px rgba(28,43,34,.5)}
+.a-map img{display:block;width:100%}
+.a-pin{position:absolute;transform:translate(-50%,-50%);border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.a-pin b{width:30px;height:30px;border-radius:50%;background:var(--white);border:4px solid var(--g);font:700 11px/22px var(--n);color:var(--g);box-shadow:0 2px 8px rgba(0,0,0,.4);transition:transform .2s}
+.a-pin span{font:700 12px var(--m);color:var(--ink);background:var(--white);padding:2px 8px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.a-pin.on b{background:var(--g);color:var(--white);transform:scale(1.2)}
+.a-route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.a-plate{position:absolute;left:clamp(12px,3vw,32px);bottom:clamp(12px,3vw,32px);background:var(--white);padding:16px 22px 14px;border-top:6px solid var(--g);max-width:380px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.a-plate small{font:600 10px var(--n);letter-spacing:.3em;color:var(--g)}
+.a-plate h1{font:900 clamp(24px,3vw,34px)/1.3 var(--m);margin-top:4px}
+.a-plate em{font:italic 800 13px var(--s);color:var(--g)}
+.a-below{max-width:1240px;margin:0 auto;padding:22px clamp(12px,3vw,28px) 0;display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:start}
+.a-intro p{color:var(--ink2);line-height:2.1;margin-bottom:8px}
+.a-panel{background:var(--white);border-left:6px solid var(--g);padding:18px 22px;box-shadow:0 2px 0 var(--line)}
+.a-panel small{font:600 10px var(--n);letter-spacing:.25em;color:var(--g)}
+.a-panel h3{font:900 20px/1.5 var(--m)}
+.a-panel p{font-size:13.5px;line-height:1.95;color:var(--ink2);margin-top:6px}
+.a-sec{max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,80px) clamp(12px,3vw,28px) 0}
+.a-h{font:900 clamp(22px,3vw,30px) var(--s);letter-spacing:.04em;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:24px}
+.a-h span{font:600 12px var(--m);letter-spacing:.3em;color:var(--mute);margin-left:12px}
+.a-isl{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;align-items:start}
+.a-sign{background:var(--white);box-shadow:0 2px 0 var(--line),0 24px 40px -30px rgba(28,43,34,.4)}
+.a-sign .ph{aspect-ratio:16/9;overflow:hidden;background:var(--g3)}
+.a-sign .ph img{width:100%;height:100%;object-fit:cover}
+.a-sign .pl{padding:14px 18px 6px;text-align:center;position:relative}
+.a-sign .pl h3{font:900 24px/1.4 var(--m);letter-spacing:.12em}
+.a-sign .pl em{display:block;font:600 11px var(--m);color:var(--mute)}
+.a-sign .bar{height:10px;background:var(--g);margin:10px -18px 0;position:relative}
+.a-sign .bar.bad{background:var(--red)}.a-sign .bar.bad2{background:#8E2A1C}.a-sign .bar.warn{background:#C9A13C}.a-sign .bar.none{background:repeating-linear-gradient(90deg,var(--ink2) 0 10px,transparent 10px 16px)}
+.a-sign .a-st{position:absolute;right:14px;top:14px;font:700 10px var(--n);letter-spacing:.15em;padding:2px 8px;border:1.5px solid currentColor}
+.a-st.ok{color:var(--g)}.a-st.warn{color:#B8862F}.a-st.bad{color:var(--red)}.a-st.bad2{color:#8E2A1C}.a-st.none{color:var(--ink2)}
+.a-sign p{font-size:13px;line-height:1.9;color:var(--ink2);padding:12px 18px 18px}
+.a-sign.noimg .ph{display:none}
+@media(max-width:800px){.a-below{grid-template-columns:1fr}.a-isl{grid-template-columns:1fr}.a-pin span{display:none}.a-plate{position:static;max-width:none;box-shadow:none;border-top:none;border-left:6px solid var(--g)}}
+
+.a-pr{max-width:1240px;margin:0 auto;padding:clamp(28px,4vw,40px) clamp(12px,3vw,28px) 0;overflow-x:auto}
+.a-pr .map{margin:0}.a-pr .map-in{min-width:620px}.a-pr .map-in::before{background:var(--g)}
+.pw-wide{position:relative;background:#14233A;color:#E8EEF6;overflow:hidden;margin-bottom:22px}
+.pw-wide img{display:block;width:100%}
+.pw-wide .tx{position:absolute;left:clamp(14px,2.4vw,28px);bottom:clamp(14px,2.4vw,28px);max-width:440px;background:rgba(255,255,255,.95);color:var(--ink);padding:16px 20px;border-top:6px solid var(--g)}
+.pw-wide.navy .tx{border-top-color:#1F3A66}
+.pw-k{font:600 10px var(--n);letter-spacing:.25em;color:var(--g)}
+.pw-n{font:900 22px/1.4 var(--m)}.pw-n em{font:italic 800 13px var(--s);color:var(--g);margin-left:8px}
+.pw-l{font:600 12px var(--m);color:var(--mute)}
+.pw-d{font-size:13px;line-height:1.95;color:var(--ink2);margin-top:6px}
+.pw-d details summary{cursor:pointer;color:var(--g);font:600 11px var(--n);letter-spacing:.15em;margin-top:6px;list-style:none}
+.pw-d details summary::-webkit-details-marker{display:none}
+.pw-d details[open] summary{display:none}
+.pw-two{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:22px}
+.pw-card{background:var(--white);border-left:6px solid var(--g);padding:16px 20px;box-shadow:0 2px 0 var(--line)}
+.crew{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.cr{background:var(--white);box-shadow:0 2px 0 var(--line),0 24px 40px -30px rgba(28,43,34,.4);display:grid;grid-template-columns:42% 1fr}
+.cr-pic{position:relative;background:var(--g3);min-height:300px}
+.cr-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.cr-tx{padding:18px 20px;display:flex;flex-direction:column}
+.cr-tx h3{font:900 19px/1.4 var(--m)}
+.cr-tx .role{font:600 11px var(--m);color:var(--mute);margin-top:2px}
+.cr-tx p{font-size:12.5px;line-height:1.9;color:var(--ink2);margin-top:8px}
+.cr-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:14px}
+.cr-btns a{font:600 10px var(--n);letter-spacing:.14em;padding:8px 12px;border:1px solid var(--g)}
+.cr-btns a.main{background:var(--g);color:var(--white)}.cr-btns a.sub{color:var(--g)}
+.chr{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding-top:30px}
+.chr::before{content:"";position:absolute;left:0;right:0;top:9px;height:4px;background:var(--g)}
+.chr > div{position:relative}
+.chr > div::before{content:"";position:absolute;left:0;top:-30px;width:14px;height:14px;border-radius:50%;background:var(--white);border:4px solid var(--g)}
+.chr small{font:600 10px var(--n);letter-spacing:.25em;color:var(--g)}
+.chr h3{font:900 17px/1.5 var(--m);margin-top:2px}
+.chr p{font-size:13px;line-height:1.95;color:var(--ink2);margin-top:6px}
+.gm-end{text-align:center;padding:clamp(48px,7vw,80px) 16px}
+.gm-end a{display:inline-block;font:600 11px var(--n);letter-spacing:.2em;padding:12px 24px;border:1px solid var(--g);color:var(--g)}
+@media(max-width:900px){.crew,.pw-two{grid-template-columns:1fr}.chr{grid-template-columns:1fr;padding-top:0;padding-left:28px}.chr::before{top:0;bottom:0;left:6px;width:4px;height:auto;right:auto}.chr > div::before{left:-28px;top:4px}}
+@media(max-width:700px){.pw-wide .tx{position:static;max-width:none}.cr{grid-template-columns:1fr}.cr-pic{min-height:0;aspect-ratio:4/5}}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,14px);padding:10px 20px;opacity:0;pointer-events:none;transition:.25s;z-index:99;font-size:12px;letter-spacing:.15em}.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<nav><div class="nav-in"><a class="brand" href="/">suzuka<i>.</i></a><div class="nav-r"><div class="route"><a href="/">HOME</a><a href="/#worlds">WORLD VIEW</a></div><div class="lang"><button data-l="ja">日本語</button><button data-l="ko">한국어</button><button data-l="zh">繁中</button><button data-l="en">EN</button></div></div></div></nav><header class="a-hero"><div class="a-map"><div style="position:relative"><img src="img/sea-chart.webp" alt="">
+<svg class="a-route" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="31,58 56,44 52,9 84,42 60,86 89,88" fill="none" stroke="#3E8B5A" stroke-width=".5" stroke-dasharray="1.4 1"/></svg>
+<button class="a-pin on" data-sea="1" style="left:31%;top:58%"><b>01</b><span>外周海</span></button><button class="a-pin" data-sea="2" style="left:56%;top:44%"><b>02</b><span>大魔海中央部</span></button><button class="a-pin" data-sea="3" style="left:52%;top:9%"><b>03</b><span>常闇の海域</span></button><button class="a-pin" data-sea="4" style="left:84%;top:42%"><b>04</b><span>凪の墓場</span></button><button class="a-pin" data-sea="5" style="left:60%;top:86%"><b>05</b><span>温暖な観光海域</span></button><button class="a-pin" data-sea="6" style="left:89%;top:88%"><b>06</b><span>未踏海域</span></button></div><div class="a-plate"><small>DESTINATION 01</small><h1>大魔海</h1><em>Pirates of Grand Mer</em></div></div></header>
+<div class="a-below"><div class="a-intro"><p>大陸と呼べる陸地はひとつだけ。その周囲に、数え切れないほどの島々が広がっている。</p><p>『大魔海（グラン・メール）』は、帝国海軍ですら容易には踏み込めない無法海域。海を支配するのは法律ではなく、船の力とそこに乗る者たちの実力だ。</p></div><div><div class="a-panel" data-panel="1"><small>WEST</small><h3>外周海</h3><p>カーディア大陸を囲む、帝国海軍の哨戒網が機能する比較的安全な海域。境界潮流を越えた先が無法の中央部。</p></div><div class="a-panel" data-panel="2" hidden><small>CENTER</small><h3>大魔海中央部</h3><p>黒牙が実効支配する無法の中心地。ネームド島の大半がここに点在し、海賊同士の縄張り争いと海軍との小競り合いが日常的な主戦場。</p></div><div class="a-panel" data-panel="3" hidden><small>NORTH</small><h3>常闇の海域</h3><p>常時嵐が吹き荒れる悪天候域。天候が読めず、経験豊富な航海士でなければ突破は困難。海賊にとっては実力試験の場。</p></div><div class="a-panel" data-panel="4" hidden><small>EAST</small><h3>凪の墓場</h3><p>無風地帯。一度迷い込むと風がやまず立ち往生し、朽ちた漂流船の残骸が漂う「船の墓場」。物資枯渇と疑心暗鬼が主題となる海域。</p></div><div class="a-panel" data-panel="5" hidden><small>SOUTH</small><h3>温暖な観光海域</h3><p>収益性の高い島々が集まる穏やかな海域。一部の海賊団が特定の島を「シマ」化し、海軍の保護区も混在する複雑な支配構造。</p></div><div class="a-panel" data-panel="6" hidden><small>???</small><h3>未踏海域</h3><p>地図上のどこにも面していない特殊な場所。ソロモンの羅針盤なくして絶対に辿り着けない。奥にはノクトゥルナが眠る。</p></div></div></div><div class="a-pr"><div class="map"><div class="map-in"><a class="st" href="#powers"><b>01</b><span>POWERS</span></a><a class="st" href="#ports"><b>02</b><span>PORTS OF CALL</span></a><a class="st" href="#crew"><b>03</b><span>CHARACTERS</span></a><a class="st" href="#chronicle"><b>04</b><span>CHRONICLE</span></a></div></div></div><section class="a-sec"><h2 class="a-h" id="powers">POWERS<span>勢力</span></h2><div class="pw-wide"><img src="img/leviathan-blueprint.webp" alt="" loading="lazy"><div class="tx"><div class="pw-k">PIRATES</div><div class="pw-n">黒牙<em>Black Fang</em></div><div class="pw-l">ゼクス・ヴァイパー</div><p class="pw-d">大魔海中央海域を実効支配する最大級の海賊団。旗艦『リヴァイアサン号』は蒸気機関を備えた黒鉄の要塞。船長は元海軍エリート、冷酷無比の絶対君主。逆らう者は例外なく海に沈む。</p></div></div>
+<div class="pw-two"><div class="pw-card"><div class="pw-k">PIRATES</div><div class="pw-n">クラーケン号<em>Kraken</em></div><div class="pw-l">マルセル・ロランディ</div><p class="pw-d">機動力と接舷戦闘に特化した中規模海賊団。船長は「不沈のマルセル」――穏やかで話が通じる大船長、しかし戦闘に入れば岩のように動かず、敵船を沈めるまで決して退かない。</p></div><div class="pw-card"><div class="pw-k">PIRATES</div><div class="pw-n">毒杯<em>Poison Chalice</em></div><div class="pw-l">ルーヴェン・カルシス</div><p class="pw-d">前髪に隠した狂気と執着、表に引き出すことはできるか。帝国海軍の秘密軍事研究施設から脱走した元軍医、毒物と外科の知識に精通する低体温の皮肉屋。他人に興味はないが、毒物にだけは熱くなる。</p></div></div>
+<div class="pw-wide navy"><img src="img/imperial-navy.webp" alt="" loading="lazy"><div class="tx"><div class="pw-k">NAVY</div><div class="pw-n">帝国海軍<em>Imperial Navy</em></div><div class="pw-l">カイエン・ヴォルグレイヴ ほか</div>
+<div class="pw-d">カーディア大陸の帝国海軍本部を頂点とする、大陸諸国の中で最も強大な海軍組織。士官学校を経た将校階級と、徴募兵の下士官階級で厳格に分かれる。表向きは「海の秩序と平和を守る」正義の組織だが、上層部の腐敗は根深く、人身売買や証拠隠滅のための民間人集落襲撃、告発者への反逆罪ねつ造など、暗部を抱える。<details><summary>続きを読む ＋</summary>50年前、当時の三大提督のうち2名を伝説の海賊ソロモン・グレイヴズに単身で討たれた歴史を持つ。以来、彼らは海賊撲滅を国是として掲げ、大魔海の中央海域に度々討伐艦隊を派遣する。カーディア大陸周辺の外周海を哨戒し、南方観光海域の一部は保護区として直接護衛している。装備は最新鋭の蒸気機関戦艦と連発銃、圧倒的な火力を誇る。</details></div></div></div></section><section class="a-sec"><h2 class="a-h" id="ports">PORTS OF CALL<span>寄港地</span></h2><div class="a-isl"><div class="a-sign noimg"><div class="pl"><span class="a-st bad">警戒</span><h3>カーディア大陸</h3><em>世界唯一の大陸／帝国の中心</em><div class="bar bad"></div></div><p>帝国海軍本部が置かれ、世界的富裕層と貧民が同居する、世界最大かつ最も格差の激しい土地。尖塔区・回廊街・船底街の3層構造。</p></div><div class="a-sign"><div class="ph"><img src="img/porto-rouge.webp" alt="" loading="lazy"></div><div class="pl"><span class="a-st bad">警戒</span><h3>ポルト・ルージュ</h3><em>無法者の港</em><div class="bar bad"></div></div><p>海賊、賞金稼ぎ、闇商人が集う無法の港町。夜になれば酒場と賭場が軒を連ね、あらゆる噂と裏取引がここで交わされる。無法者にとってはむしろ居心地の良い場所。</p></div><div class="a-sign"><div class="ph"><img src="img/vespana.webp" alt="" loading="lazy"></div><div class="pl"><span class="a-st warn">注意</span><h3>ヴェスパーナ</h3><em>中立港／愛と感謝の祭日の地</em><div class="bar warn"></div></div><p>あらゆる勢力が武器を鞘に収める暗黙の中立地帯。年に数回開かれる「愛と感謝の祭日」の期間中は、敵同士でも杯を交わすことが許される。特産は蒸留酒「ヴェスパリオン」。</p></div><div class="a-sign"><div class="ph"><img src="img/keirone.webp" alt="" loading="lazy"></div><div class="pl"><span class="a-st ok">平常</span><h3>ケイローネ島</h3><em>黄昏の実の島／日没信仰</em><div class="bar ok"></div></div><p>特産「黄昏の実」は焼きたては滋養強壮、時間経過で媚薬化する厄介な性質。住民は日没を「島が息を継ぐ時間」と呼び神聖視する。よそ者が日没時に騒ぐことは強いタブー。</p></div><div class="a-sign"><div class="ph"><img src="img/medisha.webp" alt="" loading="lazy"></div><div class="pl"><span class="a-st ok">平常</span><h3>メディシャ島</h3><em>「大魔海の薬箱」</em><div class="bar ok"></div></div><p>薬草と治癒の民間信仰で知られる島。全世帯が薬草知識を継承する。「病を持ち込む者は歓迎、隠す者は追い返す」独特の掟。重篤な患者には「治癒の歌」の歌い手が呼ばれる。</p></div><div class="a-sign noimg"><div class="pl"><span class="a-st bad2">危険</span><h3>キバナリ島</h3><em>仮面の民の島</em><div class="bar bad2"></div></div><p>排他的な部族「面伏の民」が住む。日没の色に染めた仮面を常時着用し、外来者に素顔を晒すことを固く禁じる。ジャングル奥地の本拠エリアへの侵入は非平和的な展開を招く。</p></div><div class="a-sign noimg"><div class="pl"><span class="a-st none">航路なし</span><h3>ノクトゥルナ</h3><em>ソロモンの隠し島／未踏</em><div class="bar none"></div></div><p>羅針盤なくして絶対に辿り着けぬ神秘の島。地下水路と地底湖、黄金色の鍾乳石が輝くシャンデリア空間の奥に、朽ちた帆船と、ソロモンの最後の宝が眠る。</p></div></div></section><section class="a-sec"><h2 class="a-h" id="crew">CHARACTERS<span>乗り合わせる人々</span></h2><div class="crew"><div class="cr"><div class="cr-pic"><img src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/3d1fdb06-716e-45d1-934d-f40010394a21?v=1a78c6" alt="" loading="lazy"></div><div class="cr-tx"><h3>ゼクス・ヴァイパー</h3><div class="role">28歳／黒牙船長・リヴァイアサン号</div><p>元帝国海軍のエリート将校。上層部の腐敗を目の当たりにしたことをきっかけに海軍を離反し、軍艦を奪って海賊となった。</p><p>「力がすべて」と信じて海賊になった男が、力では手に入れられないものと向き合う。</p><div class="cr-btns"><a class="main" href="https://www.plaitoon.com/ja/share/character/7ecea537-146b-4f43-a1ae-a534d1609d3e" target=_blank rel=noopener>PLAITOON ↗</a><a class="main" href="https://caveduck.io/ja/share/characters/18d49eae-fc9b-48dc-990c-3a08be7c6402?rc=JYV0CD8BkF" target=_blank rel=noopener>CAVEDUCK ↗</a><a class="sub" href="https://youtu.be/5EPeoLBp_Ic" target=_blank rel=noopener>♪ 孤高の毒蛇</a><a class="sub" href="novel/">外伝『金の目の蝮』</a></div></div></div><div class="cr"><div class="cr-pic"><img src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/d00ef582-5565-4022-9d4e-1960676fe76c?v=1ee3c1" alt="" loading="lazy"></div><div class="cr-tx"><h3>マルセル・ロランディ</h3><div class="role">34歳／クラーケン号船長</div><p>中規模海賊団「クラーケン号」を率いる、通称「不沈のマルセル」。</p><p>豪快な海賊船長と、ひとりの恩人への一途な求婚――それが「不沈のマルセル」の恋。</p><div class="cr-btns"><a class="main" href="https://www.plaitoon.com/ja/share/character/b28060e8-1c50-4a28-9001-dfed6f53f54a" target=_blank rel=noopener>PLAITOON ↗</a><a class="sub" href="https://youtu.be/t7vw-8N16TQ" target=_blank rel=noopener>♪ 不沈の情熱</a></div></div></div><div class="cr"><div class="cr-pic"><img src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/40ae19b5-0da9-49a6-9fe8-68568ab11290?v=923165" alt="" loading="lazy"></div><div class="cr-tx"><h3>ルーヴェン・カルシス</h3><div class="role">26歳／毒杯（ポイズン・チャリス）船長</div><p>中規模海賊団「毒杯」を率いる船長。元帝国海軍軍医であり、秘密軍事研究施設で毒物・薬物研究に携わった経歴を持つ。</p><p>「他人に興味のない男」の観察対象から、一人の人間へ――その変化が、前髪の下に隠された紫の瞳によって示されていく。</p><div class="cr-btns"><a class="main" href="https://www.plaitoon.com/ja/share/character/be007fea-4f54-46cd-8077-62967af29c9b" target=_blank rel=noopener>PLAITOON ↗</a><a class="sub" href="https://youtu.be/8CetMvZXofw" target=_blank rel=noopener>♪ 蟲毒のカルテ</a></div></div></div><div class="cr"><div class="cr-pic"><img src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/f9bc6ee3-e70b-48a6-9a63-45a8fd9b67c6?v=7f240b" alt="" loading="lazy"></div><div class="cr-tx"><h3>カイエン・ヴォルグレイヴ</h3><div class="role">35歳／帝国海軍第7艦隊大佐・イグニス・レジーナ号艦長</div><p>帝国海軍の対海賊専門討伐艦「イグニス・レジーナ号」を率いる大佐。</p><p>「氷の大佐」と「拷問卿」という二つの顔を持つ、帝国海軍の暗部を象徴する人物。</p><div class="cr-btns"><a class="main" href="https://www.plaitoon.com/ja/share/character/23ca70ea-79d5-42f8-b733-5f0bf18197e7" target=_blank rel=noopener>PLAITOON ↗</a></div></div></div></div></section><section class="a-sec"><h2 class="a-h" id="chronicle">CHRONICLE<span>年表</span></h2><div class="chr"><div><small>50 YEARS AGO</small><h3>ソロモン・グレイヴズの時代</h3><p>通称「隻腕のソロモン」。当時の三大海軍提督のうち2名を単身で討ち取った伝説の海賊。金銀財宝には目もくれず、ただ「自由」を求めて戦い続けた。最期は帝国総力戦の罠にかかり公開処刑。</p></div><div><small>LEGACY</small><h3>羅針盤と隠された宝</h3><p>ソロモンは死の直前、想い人エリザへの届かなかった愛を隠し島ノクトゥルナに封印した。特殊な羅針盤だけがその場所を指し示す。現在の所有者は不明。世界中のトレジャーハンターがこの鍵を追い続けている。</p></div><div><small>AFTERMATH</small><h3>共通語の広がりと大航海時代</h3><p>ソロモンの財宝を巡るトレジャーハント熱は世界に伝播し、島同士の航路を発達させた。かつて商人と貴族の交易語だった共通語は庶民層まで浸透し、今では母語しか話せない島民の方が少数派。</p></div></div></section><div class="gm-end"><a href="/#worlds">← WORLD VIEW</a></div><div class="air"></div><footer><div class="term"><small>TERMINAL</small><b>suzuka<i>.</i></b><div>END OF LINE</div></div></footer><script>
+document.querySelectorAll('[data-sea]').forEach(function(b){b.addEventListener('click',function(){
+  var k=b.getAttribute('data-sea');
+  document.querySelectorAll('[data-sea]').forEach(function(x){x.classList.toggle('on',x.getAttribute('data-sea')===k);});
+  document.querySelectorAll('[data-panel]').forEach(function(p){p.hidden=p.getAttribute('data-panel')!==k;});
+});});
+</script><script>
+(function(){
+var T={"ja": {}, "ko": {}, "zh": {}, "en": {}};
+function setLang(l){
+  if(!T[l])l='ja';
+  document.documentElement.lang=l==='zh'?'zh-Hant':l;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){var v=T[l][el.getAttribute('data-i18n')];if(v!==undefined)el.textContent=v;});
+  document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-l')===l);});
+  try{localStorage.setItem('suzuka-lang',l);}catch(e){}
+}
+var saved=null;try{saved=localStorage.getItem('suzuka-lang');}catch(e){}
+var nv=(navigator.language||'ja').toLowerCase();
+var guess=nv.indexOf('ko')===0?'ko':nv.indexOf('zh')===0?'zh':nv.indexOf('ja')===0?'ja':'en';
+setLang(saved||guess);
+document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-l'));});});
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('dragstart',function(e){if(e.target.tagName==='IMG')e.preventDefault();});
+})();
+</script>
+<div class="toast" id="toast"></div>
+<script>function cp(c){navigator.clipboard.writeText(c).then(function(){var t=document.getElementById('toast');t.textContent=c+' — COPIED';t.classList.add('on');setTimeout(function(){t.classList.remove('on')},1500)})}</script>
+</body>
+</html>
