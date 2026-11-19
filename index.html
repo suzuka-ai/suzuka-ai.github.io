@@ -6,359 +6,267 @@
 <title>suzuka — PORTFOLIO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=DM+Mono:wght@400;500&family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,600;0,800;0,900;1,800&family=Overpass+Mono:wght@400;600&family=Zen+Old+Mincho:wght@600;900&family=Zen+Kaku+Gothic+New:wght@400;700&family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR:wght@600;900&family=Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
 <style>
+
 :root{
-  --bg:#F6F8F1;
-  --bg2:#E9F0E2;
-  --paper:#FFFFFF;
-  --ink:#1E2B23;
-  --ink2:#4E5D53;
-  --mute:#8C9A90;
-  --g1:#5E8C6E;   /* main green */
-  --g2:#8DB49A;   /* light green */
-  --g3:#CFE2CF;   /* pale green */
-  --gold:#C2A15F;
-  --line:#D6E0D0;
-  --m:"Shippori Mincho",serif;
-  --c:"DM Mono",monospace;
-  --e:"Young Serif",serif;
+  --paper:#FAFBF7;--white:#FFFFFF;--ink:#1C2B22;--ink2:#4A5A50;--mute:#8E9B93;
+  --g:#3E8B5A;--g2:#A9CDB2;--g3:#E5F1E7;--sky:#5FA8D3;--sky2:#DCEEF8;--red:#C8553D;--line:#DCE4DC;
+  --s:"Overpass",sans-serif;--n:"Overpass Mono",monospace;--m:"Zen Old Mincho",serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;font-size:14px;line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background:var(--paper);color:var(--ink);font-family:"Zen Kaku Gothic New",sans-serif;font-size:14px;line-height:1.85;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
+html[lang=ko]{--m:"Noto Serif KR",serif}html[lang=ko] body{font-family:"Noto Sans KR",sans-serif}
+html[lang=zh-Hant]{--m:"Noto Serif TC",serif}html[lang=zh-Hant] body{font-family:"Noto Sans TC",sans-serif}
+img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.lang{display:flex;border:1px solid var(--line);background:var(--white)}
+.lang button{border:none;background:none;cursor:pointer;font:600 10px var(--n);letter-spacing:.05em;color:var(--ink2);padding:5px 8px}
+.lang button + button{border-left:1px solid var(--line)}
+.lang button.on{background:var(--g);color:var(--white)}
+.nav-r{display:flex;align-items:center;gap:26px}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(16px,4vw,40px);background:linear-gradient(var(--bg) 40%,transparent);}
-nav b{font:400 22px var(--e);letter-spacing:.06em;color:var(--ink)}
-nav .links{display:flex;gap:22px;font:11px var(--c);letter-spacing:.25em}
-nav .links a{color:var(--ink2);padding-bottom:2px;border-bottom:1px solid transparent;transition:.2s}
-nav .links a:hover{color:var(--g1);border-color:var(--g1)}
+/* airmail edge */
+.air{height:10px;background:repeating-linear-gradient(-45deg,var(--g) 0 14px,var(--white) 14px 22px,var(--sky) 22px 36px,var(--white) 36px 44px)}
 
-/* ── HERO ── */
-.hero{position:relative;min-height:100vh;overflow:hidden;background:var(--bg)}
-.hero-img{position:absolute;top:0;right:0;width:68%;height:100%;object-fit:cover;object-position:60% center;
-  -webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.25) 18%,rgba(0,0,0,.8) 42%,#000 65%);
-  mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,.25) 18%,rgba(0,0,0,.8) 42%,#000 65%)}
-.hero-fade{position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(transparent,var(--bg) 92%);pointer-events:none}
-.hero-dots{position:absolute;left:0;top:0;width:45%;height:100%;background-image:radial-gradient(rgba(94,140,110,.18) 1.2px,transparent 1.6px);background-size:22px 22px;
-  -webkit-mask-image:linear-gradient(to right,#000 40%,transparent);mask-image:linear-gradient(to right,#000 40%,transparent);pointer-events:none}
-.hero-rule{position:absolute;left:clamp(16px,4vw,40px);top:0;bottom:0;width:18px;border-right:1px solid rgba(30,43,35,.25);
-  background:repeating-linear-gradient(var(--ink) 0 1px,transparent 0 8px) 100% 0/6px 100% no-repeat,repeating-linear-gradient(var(--ink) 0 1px,transparent 0 40px) 100% 0/12px 100% no-repeat;opacity:.35}
+/* NAV = route line */
+nav{position:sticky;top:0;z-index:40;background:rgba(250,251,247,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1200px;margin:0 auto;padding:12px clamp(16px,4vw,32px);display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font:900 20px var(--s);letter-spacing:.02em}
+.brand i{color:var(--g);font-style:normal}
+.route{position:relative;display:flex;gap:34px}
+.route::before{content:"";position:absolute;left:8px;right:8px;top:6px;height:3px;background:var(--g);border-radius:2px}
+.route a{position:relative;padding-top:18px;font:600 10px var(--n);letter-spacing:.18em;color:var(--ink2);text-align:center}
+.route a::before{content:"";position:absolute;top:0;left:50%;width:15px;height:15px;margin-left:-7.5px;border-radius:50%;background:var(--white);border:3px solid var(--g);box-sizing:border-box}
+.route a:hover{color:var(--g)}
+.route a:hover::before{background:var(--g)}
 
-.hero-in{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px clamp(16px,4vw,40px) 90px calc(clamp(16px,4vw,40px) + 44px)}
-.hero-lbl{font:11px var(--c);letter-spacing:.35em;color:var(--g1);margin-bottom:14px}
-.hero-name{position:relative;font:400 clamp(76px,13vw,176px)/.9 var(--e);letter-spacing:-.03em;margin-bottom:34px}
-.hero-name span{display:block}
-.hero-name .s1{position:absolute;top:0;left:-3px;color:transparent;-webkit-text-stroke:1.5px var(--g2)}
-.hero-name .s2{position:absolute;top:0;left:3px;color:var(--gold);opacity:.35}
-.hero-name .s3{position:relative;color:var(--ink)}
-.hero-name em{font-style:normal;color:var(--g1)}
+/* HERO = postcard */
+.hero{padding:clamp(28px,5vw,64px) clamp(16px,4vw,32px) clamp(48px,7vw,90px);background:radial-gradient(var(--line) 1px,transparent 1.4px) 0 0/18px 18px}
+.card{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.25fr;background:var(--white);box-shadow:0 2px 0 var(--line),0 30px 50px -30px rgba(28,43,34,.35);transform:rotate(-.6deg);position:relative}
+.back{position:relative;padding:clamp(22px,3vw,36px);display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.pc-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.pc-head b{font:800 13px var(--s);letter-spacing:.5em}
+.pc-head span{font:600 11px var(--m);letter-spacing:.3em;color:var(--mute)}
+.stamp-wrap{position:absolute;top:clamp(18px,2.6vw,30px);right:clamp(18px,2.6vw,30px);width:86px;height:104px}
+.stamp{width:100%;height:100%;padding:5px;background:radial-gradient(circle,transparent 3px,var(--white) 3.4px) -5px -5px/10px 10px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
+.stamp-in{width:100%;height:100%;background:var(--white);padding:4px;display:flex;flex-direction:column}
+.stamp-img{flex:1;background:var(--white) center/82% no-repeat;border:1px solid var(--g2)}
+.stamp-v{font:800 9px var(--n);letter-spacing:.12em;color:var(--g);text-align:center;padding-top:3px}
+.postmark{position:absolute;top:clamp(40px,4vw,52px);right:clamp(78px,8vw,96px);width:96px;height:96px;color:var(--red);opacity:.7;transform:rotate(-14deg);pointer-events:none}
+.postmark text{font-family:var(--n);font-weight:600}
+.wave{position:absolute;top:clamp(58px,5.4vw,70px);right:clamp(150px,15vw,178px);width:110px;height:50px;color:var(--red);opacity:.55;pointer-events:none}
+.sender{margin-top:clamp(70px,9vw,120px)}
+.sender small{display:block;font:600 10px var(--n);letter-spacing:.3em;color:var(--mute);margin-bottom:4px}
+.sender h1{font:900 clamp(56px,7vw,96px)/.95 var(--s);letter-spacing:-.03em}
+.sender h1 i{font-style:normal;color:var(--g)}
+.sender p{font:600 11px var(--n);letter-spacing:.3em;color:var(--g);margin-top:10px}
+.addr{margin-top:auto;padding-top:28px}
+.addr a{display:grid;grid-template-columns:34px 82px 1fr 18px;align-items:center;gap:10px;padding:11px 0;border-bottom:1.5px dashed var(--line);transition:.2s}
+.addr a:first-child{border-top:1.5px dashed var(--line)}
+.addr a:hover{background:var(--g3);padding-left:8px}
+.addr .ic{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--white);display:flex;align-items:center;justify-content:center}
+.addr .lb{font:600 10px var(--n);letter-spacing:.2em;color:var(--mute)}
+.addr .hd{font:700 15px var(--s);letter-spacing:.02em}
+.addr .ar{color:var(--g);font-weight:700}
+.front{position:relative;min-height:clamp(380px,46vw,600px);overflow:hidden}
+.front img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% center;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 22%);mask-image:linear-gradient(to right,transparent 0,#000 22%)}
+.front-cap{position:absolute;right:14px;bottom:12px;font:600 10px var(--n);letter-spacing:.25em;color:var(--white);text-shadow:0 1px 4px rgba(0,0,0,.5)}
 
-.hero-links{display:flex;flex-wrap:wrap;gap:10px;max-width:640px}
-.lk{display:flex;align-items:center;gap:12px;padding:10px 16px 10px 10px;background:rgba(255,255,255,.75);backdrop-filter:blur(6px);border:1px solid var(--line);transition:.2s}
-.lk:hover{background:#fff;border-color:var(--g1);transform:translateY(-2px);box-shadow:3px 3px 0 var(--g2)}
-.lk i{width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:var(--ink);color:#fff;flex-shrink:0}
-.lk small{display:block;font:9px var(--c);letter-spacing:.25em;color:var(--mute)}
-.lk b{font:800 14px var(--m);letter-spacing:.03em}
-
-.scroll-cue{position:absolute;right:clamp(16px,4vw,40px);bottom:28px;z-index:2;font:10px var(--c);letter-spacing:.3em;color:var(--ink2);writing-mode:vertical-rl;display:flex;align-items:center;gap:10px}
-.scroll-cue::after{content:"";width:1px;height:60px;background:linear-gradient(var(--ink2),transparent)}
-
-/* ── DIVIDERS ── */
-.stripe{height:12px;background:repeating-linear-gradient(-45deg,var(--g1) 0 10px,var(--g3) 10px 20px)}
-.barcode{height:22px;width:110px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 5px,transparent 5px 8px,var(--ink) 8px 11px,transparent 11px 13px)}
-
-/* ── SECTION HEAD ── */
-.sec{position:relative;padding:clamp(60px,9vw,110px) clamp(16px,4vw,40px)}
+/* station sign heading */
+.sec{padding:clamp(56px,8vw,100px) clamp(16px,4vw,32px)}
 .sec-in{max-width:1200px;margin:0 auto}
-.sh{position:relative;margin-bottom:clamp(34px,5vw,56px)}
-.sh-no{font:11px var(--c);letter-spacing:.35em;color:var(--g1)}
-.sh-big{font:400 clamp(48px,10vw,116px)/1.05 var(--e);color:transparent;-webkit-text-stroke:1.2px var(--g1);letter-spacing:-.01em;margin:4px 0 6px}
-.sh-sub{display:flex;align-items:center;gap:12px;font:800 15px var(--m);letter-spacing:.3em}
-.sh-sub::before{content:"";width:36px;height:3px;background:var(--g1)}
-.sh-dots{position:absolute;right:0;top:12px;width:96px;height:48px;background-image:radial-gradient(var(--g2) 3px,transparent 3.5px);background-size:12px 12px}
+.sign{max-width:620px;margin:0 auto clamp(36px,5vw,56px);background:var(--white);border:1px solid var(--line);box-shadow:0 14px 26px -18px rgba(28,43,34,.35);text-align:center}
+.sign-top{display:flex;justify-content:center;align-items:center;gap:12px;padding:18px 16px 4px}
+.sign-no{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:44px;height:44px;border:3px solid var(--g);border-radius:8px;font:900 15px/1 var(--s)}
+.sign-no small{font:600 8px var(--n);letter-spacing:.1em;color:var(--g)}
+.sign-name{font:900 clamp(36px,6vw,64px)/1 var(--s);letter-spacing:.02em}
+.sign-jp{font:900 15px var(--m);letter-spacing:.5em;color:var(--ink2);padding:6px 0 16px}
+.sign-bar{display:flex;justify-content:space-between;align-items:center;background:var(--g);color:var(--white);padding:9px 16px;font:600 11px var(--n);letter-spacing:.15em}
+.sign-bar a:hover{text-decoration:underline}
+.sign-bar span{opacity:.7}
 
-/* ── PLATFORMS (tickets) ── */
-.plat{background:var(--bg2)}
-.tix{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.tk{position:relative;display:flex;min-height:150px;
-  background:radial-gradient(circle at calc(100% - 46px) 0,var(--bg2) 9px,transparent 9.5px),radial-gradient(circle at calc(100% - 46px) 100%,var(--bg2) 9px,transparent 9.5px),var(--paper);
-  filter:drop-shadow(0 8px 14px rgba(30,43,35,.08));transition:.25s}
-.tk:hover{transform:translateY(-3px) rotate(-.5deg)}
-.tk-main{flex:1;min-width:0;padding:18px 18px 16px;display:flex;flex-direction:column;justify-content:space-between}
-.tk-top{display:flex;justify-content:space-between;font:9px var(--c);letter-spacing:.25em;color:var(--mute)}
-.tk-name{font:400 clamp(24px,2.8vw,30px)/1.1 var(--e);letter-spacing:.01em;margin:6px 0 12px}
-.tk-code{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px dashed var(--line);padding-top:10px}
-.tk-code span{font:500 15px var(--c);letter-spacing:.14em}
-.tk-code button{border:1px solid var(--ink);background:transparent;font:500 10px var(--c);letter-spacing:.15em;padding:5px 10px;cursor:pointer;transition:.15s}
-.tk-code button:hover{background:var(--ink);color:#fff}
-.tk-stub{flex:0 0 46px;border-left:2px dashed var(--g2);display:flex;align-items:center;justify-content:center;font:500 10px var(--c);letter-spacing:.3em;color:var(--g1);writing-mode:vertical-rl;transition:.2s}
-.tk-stub:hover{background:var(--g3)}
+/* PLATFORMS = tickets */
+.plat{background:var(--g3)}
+.tix{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tk{position:relative;display:flex;min-height:190px;filter:drop-shadow(0 10px 14px rgba(28,43,34,.12));transition:.25s;
+  background:radial-gradient(circle at calc(100% - 50px) 0,var(--g3) 10px,transparent 10.5px),radial-gradient(circle at calc(100% - 50px) 100%,var(--g3) 10px,transparent 10.5px),
+  repeating-linear-gradient(45deg,rgba(62,139,90,.07) 0 2px,transparent 2px 7px),repeating-linear-gradient(-45deg,rgba(95,168,211,.07) 0 2px,transparent 2px 7px),#F3F9F4}
+.tk:hover{transform:translateY(-3px)}
+.tk-main{flex:1;min-width:0;padding:16px 18px;display:flex;flex-direction:column}
+.tk-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--g2);padding-bottom:6px}
+.tk-top b{font:900 16px var(--m);letter-spacing:.4em}
+.tk-top span{font:600 10px var(--n);letter-spacing:.15em;color:var(--mute)}
+.tk-route{display:flex;align-items:baseline;gap:8px;margin:12px 0 4px;flex-wrap:wrap}
+.tk-route .fr{font:600 12px var(--n)}
+.tk-route .ha{font:900 12px var(--m)}
+.tk-route .to{font:900 clamp(24px,2.6vw,30px)/1 var(--s);letter-spacing:.01em}
+.tk-arrow{height:2px;background:var(--g);position:relative;margin:6px 0 12px;width:60%}
+.tk-arrow::after{content:"";position:absolute;right:-2px;top:-4px;border-left:9px solid var(--g);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.tk-code{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tk-code small{display:block;font:600 9px var(--n);letter-spacing:.2em;color:var(--mute)}
+.tk-code b{font:600 16px var(--n);letter-spacing:.12em}
+.tk-code button{border:1.5px solid var(--g);background:var(--white);color:var(--g);font:600 10px var(--n);letter-spacing:.15em;padding:6px 10px;cursor:pointer;transition:.15s}
+.tk-code button:hover{background:var(--g);color:var(--white)}
+.tk-stub{flex:0 0 50px;border-left:2px dashed var(--g2);display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;font:800 11px var(--s);letter-spacing:.35em;color:var(--g);transition:.2s}
+.tk-stub:hover{background:var(--g);color:var(--white)}
 
-/* ── WORLDS ── */
-.worlds{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,3vw,30px)}
-.w{position:relative;display:flex;flex-direction:column;background:var(--paper);transition:.3s;box-shadow:0 1px 0 var(--line),0 10px 24px -14px rgba(30,43,35,.2)}
-.w:hover{transform:translateY(-4px);box-shadow:5px 5px 0 var(--g2),0 18px 30px -16px rgba(30,43,35,.25)}
-.w:nth-child(odd):hover{transform:translateY(-4px) rotate(-.4deg)}
-.w:nth-child(even):hover{transform:translateY(-4px) rotate(.4deg)}
-.w-head{position:relative;height:clamp(190px,22vw,240px);overflow:hidden;
-  background:repeating-linear-gradient(0deg,rgba(94,140,110,.14) 0 1px,transparent 1px 22px),repeating-linear-gradient(90deg,rgba(94,140,110,.14) 0 1px,transparent 1px 22px),linear-gradient(135deg,var(--h1),var(--h2))}
-.w-head::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(255,255,255,.85))}
-.w-no{position:absolute;top:-6px;right:12px;font:400 clamp(100px,13vw,148px)/1 var(--e);color:transparent;-webkit-text-stroke:1.5px rgba(30,43,35,.35);letter-spacing:-.05em}
-.w-genre{position:absolute;top:16px;left:18px;z-index:2;font:9px var(--c);letter-spacing:.3em;background:var(--ink);color:#fff;padding:4px 10px}
-.w-en{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;font:400 clamp(26px,3.1vw,36px)/1.1 var(--e);letter-spacing:0;
-  background:linear-gradient(100deg,var(--ink) 30%,var(--g1));-webkit-background-clip:text;background-clip:text;color:transparent}
-.w-en.jp{font:800 clamp(20px,2.4vw,26px)/1.35 var(--m);letter-spacing:.06em}
-.w-body > .w-desc:first-child{margin-top:4px}
-.tape{position:absolute;top:-9px;left:42%;width:70px;height:18px;z-index:3;background:rgba(194,161,95,.55);transform:rotate(-4deg);border-left:1px dashed rgba(255,255,255,.6);border-right:1px dashed rgba(255,255,255,.6)}
-.w:nth-child(even) .tape{transform:rotate(5deg);left:30%;background:rgba(141,180,154,.6)}
-.w-body{padding:18px 20px 16px;display:flex;flex-direction:column;flex:1}
-.w-jp{font:800 clamp(17px,2vw,20px)/1.4 var(--m);letter-spacing:.06em;margin-bottom:10px;padding-left:12px;border-left:3px solid var(--g1)}
-.w-desc{font-size:12.5px;line-height:2;color:var(--ink2);margin-bottom:14px;flex:1}
-.w-chars{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
-.w-chars span{border:1px solid var(--line);padding:3px 10px;font:600 12px var(--m);color:var(--ink2)}
-.w-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:12px;font:500 11px var(--c);letter-spacing:.25em;color:var(--g1)}
-.w-foot .barcode{height:16px;width:80px;opacity:.6}
+/* WORLD VIEW: route map index */
+.map{position:relative;overflow-x:auto;margin:0 0 clamp(36px,5vw,56px);padding:4px 0 10px}
+.map-in{position:relative;display:flex;justify-content:space-between;min-width:960px;padding:0 10px}
+.map-in::before{content:"";position:absolute;left:24px;right:24px;top:9px;height:4px;background:linear-gradient(90deg,var(--g) 0 88%,transparent 88%),repeating-linear-gradient(90deg,var(--g2) 0 8px,transparent 8px 14px);border-radius:2px}
+.st{position:relative;min-width:72px;text-align:center;padding-top:30px;white-space:nowrap}
+.st::before{content:"";position:absolute;top:0;left:50%;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:var(--white);border:4px solid var(--g);box-sizing:border-box;transition:.2s}
+.st:hover::before{background:var(--g)}
+.st b{display:block;font:900 11px var(--s);color:var(--g);letter-spacing:.05em}
+.st span{display:block;font:600 11px/1.4 var(--m);letter-spacing:-.02em;color:var(--ink2);margin-top:2px}
+.st.soon::before{border-style:dashed;border-color:var(--mute)}
+.st.soon b{color:var(--mute)}
 
-/* coming soon — sticky note */
-.w.soon{background:transparent;box-shadow:none;align-items:center;justify-content:center;min-height:360px;border:2px dashed var(--line)}
-.w.soon:hover{transform:none;box-shadow:none}
-.note{position:relative;width:min(80%,280px);background:linear-gradient(135deg,#F1F6E3 75%,#E2ECCD);padding:28px 22px 26px;transform:rotate(-3deg);box-shadow:2px 3px 0 rgba(30,43,35,.06),5px 9px 16px rgba(30,43,35,.14)}
-.note::before{content:"";position:absolute;top:-9px;left:38%;width:64px;height:18px;background:rgba(194,161,95,.6);transform:rotate(4deg)}
-.note::after{content:"";position:absolute;right:0;bottom:0;border-top:22px solid #CFDDB8;border-right:22px solid var(--bg)}
-.note small{font:9px var(--c);letter-spacing:.3em;color:var(--mute)}
-.note p{font:400 28px/1.15 var(--e);margin:8px 0 6px;color:var(--g1)}
-.note span{font:800 13px var(--m);letter-spacing:.15em;color:var(--ink2)}
+/* WORLD cards = postcards from each country */
+.worlds{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,3vw,32px)}
+.wc{position:relative;display:flex;flex-direction:column;background:var(--white);box-shadow:0 2px 0 var(--line),0 18px 30px -22px rgba(28,43,34,.4);transition:.3s;scroll-margin-top:90px}
+a.wc:hover{transform:translateY(-4px) rotate(-.3deg)}
+.wc-pic{position:relative;height:clamp(170px,19vw,210px);overflow:hidden;
+  background:repeating-radial-gradient(circle at var(--cx) var(--cy),transparent 0 15px,rgba(62,139,90,.22) 15px 16px),linear-gradient(135deg,var(--c1),var(--c2))}
+.wc-pic{height:clamp(200px,22vw,250px)}
+.wc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(#000 58%,transparent 100%);mask-image:linear-gradient(#000 58%,transparent 100%)}
+.wc-pic::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(transparent,var(--white))}
+.wc-dest{position:absolute;left:16px;bottom:10px;z-index:2;background:var(--ink);color:var(--white);font:600 10px var(--n);letter-spacing:.2em;padding:4px 10px}
+.wc-genre{position:absolute;left:16px;top:16px;z-index:2;font:800 11px var(--s);letter-spacing:.2em;color:var(--ink);background:rgba(255,255,255,.9);padding:3px 9px}
+.wc .stamp-wrap{top:14px;right:16px;width:70px;height:84px;z-index:2}
+.wc .stamp-in{align-items:center;justify-content:center;border:1.5px solid var(--g)}
+.wc .stamp-in b{font:900 28px/1 var(--s);color:var(--g)}
+.wc .stamp-in small{font:600 7px var(--n);letter-spacing:.15em;color:var(--ink2);margin-top:4px}
+.wc .postmark{top:44px;right:62px;width:84px;height:84px;z-index:3;color:var(--red);opacity:.95;filter:drop-shadow(0 0 .6px #fff) drop-shadow(0 0 .6px #fff) drop-shadow(0 0 .6px #fff)}
+.wc-body{padding:18px 20px 16px;display:flex;flex-direction:column;flex:1}
+.wc-name{font:900 clamp(19px,2.2vw,24px)/1.4 var(--m);letter-spacing:.05em}
+.wc-en{font:italic 800 13px var(--s);color:var(--g);letter-spacing:.04em;margin-top:2px}
+html[lang=en] .wc-en.dup{display:none}
+.wc-desc{font-size:12.5px;line-height:2;color:var(--ink2);margin:12px 0 14px;flex:1}
+.wc-res{display:flex;align-items:flex-start;gap:12px;border-top:1px dashed var(--line);padding-top:12px}
+.wc-res > small{flex:0 0 auto;font:600 9px/2.3 var(--n);letter-spacing:.2em;color:var(--mute)}
+.wc-res ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 14px}
+.wc-res li{font:600 12.5px var(--m);display:flex;align-items:center;gap:6px}
+.wc-res li::before{content:"#";font:700 12px var(--n);color:var(--g)}
+.wc-foot{display:flex;justify-content:flex-end;margin-top:14px;font:800 11px var(--s);letter-spacing:.25em;color:var(--g)}
+.wc-foot.off{color:var(--mute)}
+/* uncharted */
+.wc.soon{background:transparent;box-shadow:none;border:2px dashed var(--g2)}
+.wc.soon .wc-pic{background:repeating-radial-gradient(circle at 40% 60%,transparent 0 15px,rgba(142,155,147,.18) 15px 16px),var(--white)}
+.unch{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
+.unch span{border:3px double var(--red);color:var(--red);font:900 22px var(--s);letter-spacing:.3em;padding:6px 16px;transform:rotate(-8deg);opacity:.75}
 
-/* ── FOOTER ── */
-footer{padding:36px clamp(16px,4vw,40px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:4px solid var(--g1)}
-footer b{font:400 26px var(--e);letter-spacing:.04em}
-footer .r{display:flex;align-items:center;gap:14px;font:10px var(--c);letter-spacing:.25em;color:var(--mute)}
+footer{text-align:center;padding:40px 16px 46px}
+footer .term{display:inline-block;background:var(--white);border:1px solid var(--line);padding:14px 40px 0;min-width:260px}
+footer .term small{font:600 10px var(--n);letter-spacing:.3em;color:var(--mute)}
+footer .term b{display:block;font:900 30px var(--s);letter-spacing:.02em}
+footer .term b i{font-style:normal;color:var(--g)}
+footer .term div{background:var(--g);color:var(--white);font:600 10px var(--n);letter-spacing:.3em;margin:10px -40px 0;padding:6px}
+.toast{background:var(--ink);color:var(--white);font-family:var(--n)}
 
-.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,14px);background:var(--ink);color:#fff;padding:10px 20px;font:11px var(--c);letter-spacing:.2em;opacity:0;pointer-events:none;transition:.25s;z-index:99}
-.toast.on{opacity:1;transform:translate(-50%,0)}
-
-/* ── RESPONSIVE ── */
-@media(max-width:1000px){
-  .tix{grid-template-columns:1fr 1fr}
-  .tix .tk:last-child{grid-column:1/-1}
-}
-@media(max-width:760px){
-  nav .links{display:none}
-  .hero{min-height:auto}
-  .hero-img{position:relative;width:100%;height:62vh;min-height:340px;object-position:65% center;
-    -webkit-mask-image:linear-gradient(to bottom,#000 42%,transparent 90%);mask-image:linear-gradient(to bottom,#000 42%,transparent 90%)}
-  .hero-fade,.hero-dots,.hero-rule,.scroll-cue{display:none}
-  .hero-in{min-height:auto;margin-top:-90px;padding:0 16px 56px}
-  .hero-name{font-size:clamp(76px,24vw,120px);margin-bottom:24px}
-  .hero-links{flex-direction:column}
-  .lk{width:100%}
-  .tix{grid-template-columns:1fr}
-  .tix .tk:last-child{grid-column:auto}
+@media(max-width:1000px){.tix{grid-template-columns:1fr 1fr}.tix .tk:last-child{grid-column:1/-1}}
+@media(max-width:780px){
+  .route{gap:20px}.route a{font-size:9px;letter-spacing:.1em}
+  .card{grid-template-columns:1fr;transform:none}
+  .front{order:-1;min-height:300px}
+  .front img{-webkit-mask-image:linear-gradient(to bottom,#000 70%,transparent);mask-image:linear-gradient(to bottom,#000 70%,transparent)}
+  .back{border-right:none}
+  .sender{margin-top:96px}
+  .tix{grid-template-columns:1fr}.tix .tk:last-child{grid-column:auto}
   .worlds{grid-template-columns:1fr}
-  .sh-dots{display:none}
 }
-@media(max-width:420px){
-  .w-desc{font-size:12px}
-  .tk-code span{font-size:13px}
-}
+@media(max-width:480px){.route{display:none}.lang button{padding:5px 6px;font-size:9px}.addr a{grid-template-columns:30px 70px 1fr 14px}.addr .hd{font-size:14px}}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,14px);padding:10px 20px;opacity:0;pointer-events:none;transition:.25s;z-index:99;font-size:12px;letter-spacing:.15em}.toast.on{opacity:1;transform:translate(-50%,0)}
 </style>
 </head>
 <body>
-
-<nav>
-  <b>suzuka</b>
-  <div class="links"><a href="#platforms">PLATFORMS</a><a href="#worlds">WORLD VIEW</a></div>
-</nav>
-
-<!-- HERO -->
-<header class="hero" id="home">
-  <img class="hero-img" src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=1200/charim/bd60d114-13c5-4a23-8423-1da715d9bf3c?v=88147c" alt="">
-  <div class="hero-dots"></div>
-  <div class="hero-rule"></div>
-  <div class="hero-fade"></div>
-  <div class="hero-in">
-    <p class="hero-lbl">PORTFOLIO — WRITER / WORLDBUILDER</p>
-    <h1 class="hero-name"><span class="s1">suzuka.</span><span class="s2">suzuka.</span><span class="s3">suzuka<em>.</em></span></h1>
-    <div class="hero-links">
-      <a class="lk" href="https://x.com/suzuka_aaf" target="_blank" rel="noopener"><i><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></i><span><small>X</small><b>@suzuka_aaf</b></span></a>
-      <a class="lk" href="https://wavebox.me/wave/b4j14j7gswalu8gk/" target="_blank" rel="noopener"><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></i><span><small>WAVEBOX</small><b>suzuka</b></span></a>
-      <a class="lk" href="https://suno.com/@suzuka_aaf" target="_blank" rel="noopener"><i><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></i><span><small>SUNO</small><b>@suzuka_aaf</b></span></a>
-    </div>
-  </div>
-  <div class="scroll-cue">SCROLL</div>
-</header>
-
-<div class="stripe"></div>
-
-<!-- PLATFORMS -->
-<section class="sec plat" id="platforms">
-  <div class="sec-in">
-    <div class="sh">
-      <p class="sh-no">SECTION 01</p>
-      <h2 class="sh-big">PLATFORMS</h2>
-      <p class="sh-sub">活動場所</p>
-      <div class="sh-dots"></div>
-    </div>
-    <div class="tix">
-      <div class="tk">
-        <div class="tk-main">
-          <div class="tk-top"><span>No. 01</span><span>INVITE</span></div>
-          <div class="tk-name">Plaitoon</div>
-          <div class="tk-code"><span>9B8E4E0C</span><button onclick="cp('9B8E4E0C')">COPY</button></div>
-        </div>
-        <a class="tk-stub" href="https://www.plaitoon.com/" target="_blank" rel="noopener">VISIT ↗</a>
-      </div>
-      <div class="tk">
-        <div class="tk-main">
-          <div class="tk-top"><span>No. 02</span><span>INVITE</span></div>
-          <div class="tk-name">Tikita</div>
-          <div class="tk-code"><span>T4093M</span><button onclick="cp('T4093M')">COPY</button></div>
-        </div>
-        <a class="tk-stub" href="https://tikita.com/" target="_blank" rel="noopener">VISIT ↗</a>
-      </div>
-      <div class="tk">
-        <div class="tk-main">
-          <div class="tk-top"><span>No. 03</span><span>INVITE</span></div>
-          <div class="tk-name">CAVEDUCK</div>
-          <div class="tk-code"><span>JYV0CD8BkF</span><button onclick="cp('JYV0CD8BkF')">COPY</button></div>
-        </div>
-        <a class="tk-stub" href="https://caveduck.io/" target="_blank" rel="noopener">VISIT ↗</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="stripe"></div>
-
-<!-- WORLD VIEW -->
-<section class="sec" id="worlds">
-  <div class="sec-in">
-    <div class="sh">
-      <p class="sh-no">SECTION 02</p>
-      <h2 class="sh-big">WORLD VIEW</h2>
-      <p class="sh-sub">世界観</p>
-      <div class="sh-dots"></div>
-    </div>
-
-    <div class="worlds">
-
-      <a class="w" href="https://www.plaitoon.com/characters/61fa9469-cfe3-426a-a3a5-d00571fb471c" target="_blank" rel="noopener" style="--h1:#D7EAE4;--h2:#9CC7BD">
-        <div class="tape"></div>
-        <div class="w-head"><span class="w-no">01</span><span class="w-genre">FANTASY / PIRATES</span><h3 class="w-en">Pirates of Grand Mer</h3></div>
-        <div class="w-body">
-          <p class="w-jp">大魔海（グラン・メール）</p>
-          <p class="w-desc">カーディア大陸の法も国境も届かない無法の海。魔法なきこの世界で頼れるのは、己の武力と船の性能だけ。逃げ延びた罪人、夢想家、亡霊たちが、それぞれの船に居場所を見出している。</p>
-          <div class="w-chars"><span>ゼクス</span><span>マルセル</span><span>ルーヴェン</span><span>カイエン</span></div>
-          <div class="w-foot"><span>OPEN SERIES →</span><div class="barcode"></div></div>
-        </div>
-      </a>
-
-      <a class="w" href="https://www.plaitoon.com/characters/673eca86-7304-4a05-99df-78167587f9ce" target="_blank" rel="noopener" style="--h1:#E3EBDD;--h2:#A9BFA0">
-        <div class="tape"></div>
-        <div class="w-head"><span class="w-no">02</span><span class="w-genre">OMEGAVERSE / MILITARY</span><h3 class="w-en">Valtreich Chronik</h3></div>
-        <div class="w-body">
-          <p class="w-jp">ヴァルトライヒ軍</p>
-          <p class="w-desc">ヒート期を短縮し、兵の継続戦闘力を担保するため、番制度が軍規に追加された軍。</p>
-          <div class="w-chars"><span>レヴァル</span><span>ヴォルフ</span><span>ミハイル</span><span>エリク</span><span>カーレル</span></div>
-          <div class="w-foot"><span>OPEN SERIES →</span><div class="barcode"></div></div>
-        </div>
-      </a>
-
-      <a class="w" href="https://www.plaitoon.com/characters/1fe64f83-fa9b-4e4a-a9d4-95e0f9e10546" target="_blank" rel="noopener" style="--h1:#EEF3E4;--h2:#C3D6A8">
-        <div class="tape"></div>
-        <div class="w-head"><span class="w-no">03</span><span class="w-genre">MODERN / LUXURY</span><h3 class="w-en">THE ASCEND TOWER</h3></div>
-        <div class="w-body">
-          <p class="w-desc">成功者だけが住むことを許された、天空の超高級タワー『ザ・アセンド』。種族は問われない。求められるのは莫大な資産だけ。欲望と格差が交差する、閉ざされた楽園。</p>
-          <div class="w-chars"><span>ガルム</span><span>イアン</span><span>マテオ</span><span>ルーファス</span><span>カルロ</span></div>
-          <div class="w-foot"><span>OPEN SERIES →</span><div class="barcode"></div></div>
-        </div>
-      </a>
-
-      <a class="w" href="https://www.plaitoon.com/characters/dbda698f-c1b7-4d89-b141-c5fddb2c1015" target="_blank" rel="noopener" style="--h1:#E2EFE2;--h2:#A3CBAF">
-        <div class="tape"></div>
-        <div class="w-head"><span class="w-no">04</span><span class="w-genre">MODERN / BEASTMEN</span><h3 class="w-en jp">野生回帰プロジェクト</h3></div>
-        <div class="w-body">
-          <p class="w-desc">準人類（獣人）たちに権利を。人に飼われ支配される彼らに自由を――という運動が高まりを見せている、現代風社会で生きる準人類と人間のあれこれ。</p>
-          <div class="w-chars"><span>あなたの人魚</span><span>ロコ</span><span>むぎ</span></div>
-          <div class="w-foot"><span>OPEN SERIES →</span><div class="barcode"></div></div>
-        </div>
-      </a>
-
-      <a class="w" href="https://www.plaitoon.com/characters/75f5ab7d-d539-4001-b40d-bada1e5a8f4b" target="_blank" rel="noopener" style="--h1:#E6E9E0;--h2:#A6B7A6">
-        <div class="tape"></div>
-        <div class="w-head"><span class="w-no">05</span><span class="w-genre">DARK FANTASY / MARKET</span><h3 class="w-en jp">魔界商都『ゾル・ヴァルガ』の生体市場</h3></div>
-        <div class="w-body">
-          <p class="w-desc">魔界の中層に位置する巨大な商業都市。薄暗い紫色の空に覆われ、魔力を含んだ雨が降る街は、魔界全土からあらゆる「商品」が集まる欲望の掃き溜めであり、最高級の贅沢品が取引される場所でもある。</p>
-          <div class="w-chars"><span>ヴァルツ</span><span>モーリス</span><span>アラク</span><span>名もなき蛾</span><span>ザフィ</span></div>
-          <div class="w-foot"><span>OPEN SERIES →</span><div class="barcode"></div></div>
-        </div>
-      </a>
-
-      <a class="w" href="https://www.plaitoon.com/characters/d7a3e641-7ee7-4c36-9efd-72d46e80b7b0" target="_blank" rel="noopener" style="--h1:#E4F0EC;--h2:#9FC9C0">
-        <div class="tape"></div>
-        <div class="w-head"><span class="w-no">06</span><span class="w-genre">SCI-FI / MEDICAL</span><h3 class="w-en jp">ヒートロット（発情症候群）</h3></div>
-        <div class="w-body">
-          <p class="w-desc">2040年代の惑星エルデ。体内で「発情細胞」が増殖する原因不明の疾患――通称ヒートロット。唯一の治療法は、極めて希少な「抗体キャリア」から抗体因子を受け取ること。</p>
-          <div class="w-chars"><span>ミラ</span><span>ヴォルカー</span><span>セイル</span></div>
-          <div class="w-foot"><span>OPEN SERIES →</span><div class="barcode"></div></div>
-        </div>
-      </a>
-
-      <div class="w" style="--h1:#EFF2E6;--h2:#C9D8B4">
-        <div class="tape"></div>
-        <div class="w-head"><span class="w-no">07</span><span class="w-genre">FANTASY / MARRIAGE</span><h3 class="w-en">MARCHÉ.MARIAGE</h3></div>
-        <div class="w-body">
-          <p class="w-desc">魔法発達から数千年が経った大陸。婚姻は大陸魔法評議会の管轄下にあり、評議会公認の婚姻マーケットを介した売買、マッチング、そして夫婦関係改善プログラムまでが制度として整えられている。</p>
-          <div class="w-chars"><span>リシェル</span><span>ミラン</span><span>カイロン</span></div>
-          <div class="w-foot"><span>SERIES</span><div class="barcode"></div></div>
-        </div>
-      </div>
-
-      <div class="w" style="--h1:#E6EEDC;--h2:#AFC69B">
-        <div class="tape"></div>
-        <div class="w-head"><span class="w-no">08</span><span class="w-genre">FANTASY / BEASTMEN</span><h3 class="w-en jp">カラフ大森林</h3></div>
-        <div class="w-body">
-          <p class="w-desc">肉食獣人ドラウ族が数百年にわたり治める深い森。服属する部族は年貢を納めて不可侵を保証され、部族同士の揉め事は森主への陳情によって裁かれる。</p>
-          <div class="w-chars"><span>ニサール</span><span>ガイル</span></div>
-          <div class="w-foot"><span>SERIES</span><div class="barcode"></div></div>
-        </div>
-      </div>
-
-      <div class="w" style="--h1:#E7ECE6;--h2:#A8B9AE">
-        <div class="tape"></div>
-        <div class="w-head"><span class="w-no">09</span><span class="w-genre">MODERN / MAFIA</span><h3 class="w-en jp">中華マフィアシリーズ</h3></div>
-        <div class="w-body">
-          <p class="w-desc">現代、中国南部。海運・金融・不動産を表の顔に持つ組織と、その当主たち。</p>
-          <div class="w-chars"><span>謝 黎明</span><span>霍 凌修</span><span>張 明煦</span></div>
-          <div class="w-foot"><span>SERIES</span><div class="barcode"></div></div>
-        </div>
-      </div>
-
-      <div class="w soon">
-        <div class="note">
-          <small>No. 10</small>
-          <p>Coming soon.</p>
-          <span>次の世界、準備中</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="stripe"></div>
-
-<footer>
-  <b>suzuka<em style="color:var(--g1)">.</em></b>
-  <div class="r"><div class="barcode"></div><span>END OF FILE</span></div>
-</footer>
-
-<div class="toast" id="toast"></div>
-<script>
-function cp(c){navigator.clipboard.writeText(c).then(()=>{const t=document.getElementById('toast');t.textContent=c+' — COPIED';t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1500)})}
+<nav><div class="nav-in"><a class="brand" href="#home">suzuka<i>.</i></a><div class="nav-r"><div class="route"><a href="#home">HOME</a><a href="#platforms">PLATFORMS</a><a href="#worlds">WORLD VIEW</a></div><div class="lang"><button data-l="ja">日本語</button><button data-l="ko">한국어</button><button data-l="zh">繁中</button><button data-l="en">EN</button></div></div></div></nav><header class="hero" id="home"><div class="card">
+<div class="back">
+  <div class="pc-head"><b>POST CARD</b><span data-i18n="pc">郵便はがき</span></div>
+  <div class="stamp-wrap"><div class="stamp"><div class="stamp-in"><div class="stamp-img" style="background-image:url('https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/c4abe75f-c013-4baf-b7a3-19d0f6d1253f?v=aa50fb')"></div><div class="stamp-v">SUZUKA</div></div></div></div>
+  <svg class="wave" viewBox="0 0 110 50" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M0 8 q9 -7 18 0 t18 0 t18 0 t18 0 t18 0 t18 0"/><path d="M0 20 q9 -7 18 0 t18 0 t18 0 t18 0 t18 0 t18 0"/><path d="M0 32 q9 -7 18 0 t18 0 t18 0 t18 0 t18 0 t18 0"/><path d="M0 44 q9 -7 18 0 t18 0 t18 0 t18 0 t18 0 t18 0"/></svg><svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="pmh" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="10.5" letter-spacing="2.2" fill="currentColor"><textPath href="#pmh">SUZUKA POST · WORLD VIEW · </textPath></text><text x="60" y="66" text-anchor="middle" font-size="17" fill="currentColor">SZ</text></svg>
+  <div class="sender"><small>FROM</small><h1>suzuka<i>.</i></h1><p>WRITER / WORLDBUILDER</p></div>
+  <div class="addr"><a href="https://x.com/suzuka_aaf" target="_blank" rel="noopener"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span><span class="lb">X</span><span class="hd">@suzuka_aaf</span><span class="ar">→</span></a><a href="https://wavebox.me/wave/b4j14j7gswalu8gk/" target="_blank" rel="noopener"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span class="lb">WAVEBOX</span><span class="hd">suzuka</span><span class="ar">→</span></a><a href="https://suno.com/@suzuka_aaf" target="_blank" rel="noopener"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span><span class="lb">SUNO</span><span class="hd">@suzuka_aaf</span><span class="ar">→</span></a></div>
+</div>
+<div class="front"><img src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/c7764f63-c3e8-4a1e-bde2-dcebf4b6ba62?v=88147c" alt=""><span class="front-cap">VIEW No.001</span></div>
+</div></header><div class="air"></div><section class="sec plat" id="platforms"><div class="sec-in"><div class="sign"><div class="sign-top"><span class="sign-no"><small>SZ</small>01</span></div>
+<div class="sign-name">PLATFORMS</div><div class="sign-jp" data-i18n="s1">活動場所</div>
+<div class="sign-bar"><a href="#home">← HOME</a><span>SUZUKA LINE</span><a href="#worlds">WORLD VIEW →</a></div></div><div class="tix"><div class="tk"><div class="tk-main"><div class="tk-top"><b data-i18n="tk">乗車券</b><span>No.01</span></div>
+<div class="tk-route"><span class="fr">suzuka</span><span class="ha" data-i18n="dep">発</span></div><div class="tk-arrow"></div>
+<div class="tk-route"><span class="to">Plaitoon</span><span class="ha" data-i18n="arr">行</span></div>
+<div class="tk-code"><div><small>INVITE CODE</small><b>9B8E4E0C</b></div><button onclick="cp('9B8E4E0C')">COPY</button></div></div>
+<a class="tk-stub" href="https://www.plaitoon.com/" target="_blank" rel="noopener">VISIT ↗</a></div><div class="tk"><div class="tk-main"><div class="tk-top"><b data-i18n="tk">乗車券</b><span>No.02</span></div>
+<div class="tk-route"><span class="fr">suzuka</span><span class="ha" data-i18n="dep">発</span></div><div class="tk-arrow"></div>
+<div class="tk-route"><span class="to">Tikita</span><span class="ha" data-i18n="arr">行</span></div>
+<div class="tk-code"><div><small>INVITE CODE</small><b>T4093M</b></div><button onclick="cp('T4093M')">COPY</button></div></div>
+<a class="tk-stub" href="https://tikita.com/" target="_blank" rel="noopener">VISIT ↗</a></div><div class="tk"><div class="tk-main"><div class="tk-top"><b data-i18n="tk">乗車券</b><span>No.03</span></div>
+<div class="tk-route"><span class="fr">suzuka</span><span class="ha" data-i18n="dep">発</span></div><div class="tk-arrow"></div>
+<div class="tk-route"><span class="to">CAVEDUCK</span><span class="ha" data-i18n="arr">行</span></div>
+<div class="tk-code"><div><small>INVITE CODE</small><b>JYV0CD8BkF</b></div><button onclick="cp('JYV0CD8BkF')">COPY</button></div></div>
+<a class="tk-stub" href="https://caveduck.io/" target="_blank" rel="noopener">VISIT ↗</a></div></div></div></section><div class="air"></div><section class="sec" id="worlds"><div class="sec-in"><div class="sign"><div class="sign-top"><span class="sign-no"><small>SZ</small>02</span></div>
+<div class="sign-name">WORLD VIEW</div><div class="sign-jp" data-i18n="s2">世界観</div>
+<div class="sign-bar"><a href="#platforms">← PLATFORMS</a><span>SUZUKA LINE</span><a href="#home">HOME →</a></div></div>
+<div class="map"><div class="map-in"><a class="st" href="#w01"><b>01</b><span data-i18n="w01s">大魔海</span></a><a class="st" href="#w02"><b>02</b><span data-i18n="w02s">ヴァルトライヒ</span></a><a class="st" href="#w03"><b>03</b><span data-i18n="w03s">ASCEND</span></a><a class="st" href="#w04"><b>04</b><span data-i18n="w04s">野生回帰</span></a><a class="st" href="#w05"><b>05</b><span data-i18n="w05s">ゾル・ヴァルガ</span></a><a class="st" href="#w06"><b>06</b><span data-i18n="w06s">ヒートロット</span></a><a class="st" href="#w07"><b>07</b><span data-i18n="w07s">MARCHÉ</span></a><a class="st" href="#w08"><b>08</b><span data-i18n="w08s">カラフ大森林</span></a><a class="st" href="#w09"><b>09</b><span data-i18n="w09s">中華マフィア</span></a><a class="st soon" href="#w10"><b>10</b><span data-i18n="w10s">未踏</span></a></div></div><div class="worlds"><a class="wc" id="w01" href="https://www.plaitoon.com/characters/61fa9469-cfe3-426a-a3a5-d00571fb471c" target="_blank" rel="noopener" style="--c1:#DFF0EF;--c2:#9ED0C6;--cx:30%;--cy:70%">
+<div class="wc-pic"><img class="wc-img" src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/d3234f6e-e350-492d-b689-8a30b4d3f509?v=a47430" alt="" loading="lazy" style="object-position:center 55%"><span class="wc-genre">FANTASY / PIRATES</span><span class="wc-dest">DESTINATION 01</span>
+<div class="stamp-wrap"><div class="stamp"><div class="stamp-in"><b>01</b><small>SUZUKA</small></div></div></div><svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="pmw01" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="10.5" letter-spacing="2.2" fill="currentColor"><textPath href="#pmw01">SUZUKA POST · DESTINATION · </textPath></text><text x="60" y="66" text-anchor="middle" font-size="17" fill="currentColor">01</text></svg></div>
+<div class="wc-body"><div class="wc-name" data-i18n="w01n">大魔海（グラン・メール）</div><div class="wc-en dup">Pirates of Grand Mer</div><p class="wc-desc" data-i18n="w01d">カーディア大陸の法も国境も届かない無法の海。魔法なきこの世界で頼れるのは、己の武力と船の性能だけ。逃げ延びた罪人、夢想家、亡霊たちが、それぞれの船に居場所を見出している。</p>
+<div class="wc-res"><small>TAGS</small><ul><li data-i18n="w01t0">海賊</li><li data-i18n="w01t1">無法の海</li><li data-i18n="w01t2">船</li></ul></div><div class="wc-foot">OPEN SERIES →</div></div></a><a class="wc" id="w02" href="https://www.plaitoon.com/characters/673eca86-7304-4a05-99df-78167587f9ce" target="_blank" rel="noopener" style="--c1:#E7F0DF;--c2:#AFCB9E;--cx:70%;--cy:40%">
+<div class="wc-pic"><img class="wc-img" src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/76d656f2-afb8-41cc-98d3-7a0a4c40f759?v=779abf" alt="" loading="lazy" style="object-position:center 28%"><span class="wc-genre">OMEGAVERSE / MILITARY</span><span class="wc-dest">DESTINATION 02</span>
+<div class="stamp-wrap"><div class="stamp"><div class="stamp-in"><b>02</b><small>SUZUKA</small></div></div></div><svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="pmw02" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="10.5" letter-spacing="2.2" fill="currentColor"><textPath href="#pmw02">SUZUKA POST · DESTINATION · </textPath></text><text x="60" y="66" text-anchor="middle" font-size="17" fill="currentColor">02</text></svg></div>
+<div class="wc-body"><div class="wc-name" data-i18n="w02n">ヴァルトライヒ軍</div><div class="wc-en dup">Valtreich Chronik</div><p class="wc-desc" data-i18n="w02d">ヒート期を短縮し、兵の継続戦闘力を担保するため、番制度が軍規に追加された軍。</p>
+<div class="wc-res"><small>TAGS</small><ul><li data-i18n="w02t0">オメガバース</li><li data-i18n="w02t1">軍隊</li><li data-i18n="w02t2">番制度</li></ul></div><div class="wc-foot">OPEN SERIES →</div></div></a><a class="wc" id="w03" href="https://www.plaitoon.com/characters/1fe64f83-fa9b-4e4a-a9d4-95e0f9e10546" target="_blank" rel="noopener" style="--c1:#EAF4E4;--c2:#B9D7A5;--cx:20%;--cy:30%">
+<div class="wc-pic"><img class="wc-img" src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/fd92a09b-713f-4d87-9fc4-01ad6e85d04e?v=61c9fd" alt="" loading="lazy" style="object-position:center 40%"><span class="wc-genre">MODERN / LUXURY</span><span class="wc-dest">DESTINATION 03</span>
+<div class="stamp-wrap"><div class="stamp"><div class="stamp-in"><b>03</b><small>SUZUKA</small></div></div></div><svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="pmw03" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="10.5" letter-spacing="2.2" fill="currentColor"><textPath href="#pmw03">SUZUKA POST · DESTINATION · </textPath></text><text x="60" y="66" text-anchor="middle" font-size="17" fill="currentColor">03</text></svg></div>
+<div class="wc-body"><div class="wc-name" data-i18n="w03n">THE ASCEND TOWER</div><p class="wc-desc" data-i18n="w03d">成功者だけが住むことを許された、天空の超高級タワー『ザ・アセンド』。種族は問われない。求められるのは莫大な資産だけ。欲望と格差が交差する、閉ざされた楽園。</p>
+<div class="wc-res"><small>TAGS</small><ul><li data-i18n="w03t0">現代</li><li data-i18n="w03t1">超富裕層</li><li data-i18n="w03t2">欲望と格差</li></ul></div><div class="wc-foot">OPEN SERIES →</div></div></a><a class="wc" id="w04" href="https://www.plaitoon.com/characters/dbda698f-c1b7-4d89-b141-c5fddb2c1015" target="_blank" rel="noopener" style="--c1:#DDF0E6;--c2:#9FCFB3;--cx:60%;--cy:80%">
+<div class="wc-pic"><img class="wc-img" src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/6eb10608-32a7-409c-9d2d-17037663bf52?v=bb3f52" alt="" loading="lazy" style="object-position:30% center"><span class="wc-genre">MODERN / BEASTMEN</span><span class="wc-dest">DESTINATION 04</span>
+<div class="stamp-wrap"><div class="stamp"><div class="stamp-in"><b>04</b><small>SUZUKA</small></div></div></div><svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="pmw04" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="10.5" letter-spacing="2.2" fill="currentColor"><textPath href="#pmw04">SUZUKA POST · DESTINATION · </textPath></text><text x="60" y="66" text-anchor="middle" font-size="17" fill="currentColor">04</text></svg></div>
+<div class="wc-body"><div class="wc-name" data-i18n="w04n">野生回帰プロジェクト</div><p class="wc-desc" data-i18n="w04d">準人類（獣人）たちに権利を。人に飼われ支配される彼らに自由を――という運動が高まりを見せている、現代風社会で生きる準人類と人間のあれこれ。</p>
+<div class="wc-res"><small>TAGS</small><ul><li data-i18n="w04t0">現代</li><li data-i18n="w04t1">獣人</li><li data-i18n="w04t2">人と獣人</li></ul></div><div class="wc-foot">OPEN SERIES →</div></div></a><a class="wc" id="w05" href="https://www.plaitoon.com/characters/75f5ab7d-d539-4001-b40d-bada1e5a8f4b" target="_blank" rel="noopener" style="--c1:#E3EAE6;--c2:#A5BDB0;--cx:80%;--cy:60%">
+<div class="wc-pic"><img class="wc-img" src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/4b634d86-25e0-4d58-a0d7-5b351ba5f28e?v=0867ba" alt="" loading="lazy" style="object-position:center 45%"><span class="wc-genre">DARK FANTASY / MARKET</span><span class="wc-dest">DESTINATION 05</span>
+<div class="stamp-wrap"><div class="stamp"><div class="stamp-in"><b>05</b><small>SUZUKA</small></div></div></div><svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="pmw05" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="10.5" letter-spacing="2.2" fill="currentColor"><textPath href="#pmw05">SUZUKA POST · DESTINATION · </textPath></text><text x="60" y="66" text-anchor="middle" font-size="17" fill="currentColor">05</text></svg></div>
+<div class="wc-body"><div class="wc-name" data-i18n="w05n">魔界商都『ゾル・ヴァルガ』の生体市場</div><p class="wc-desc" data-i18n="w05d">魔界の中層に位置する巨大な商業都市。薄暗い紫色の空に覆われ、魔力を含んだ雨が降る街は、魔界全土からあらゆる「商品」が集まる欲望の掃き溜めであり、最高級の贅沢品が取引される場所でもある。</p>
+<div class="wc-res"><small>TAGS</small><ul><li data-i18n="w05t0">魔界</li><li data-i18n="w05t1">ダークファンタジー</li><li data-i18n="w05t2">生体市場</li></ul></div><div class="wc-foot">OPEN SERIES →</div></div></a><a class="wc" id="w06" href="https://www.plaitoon.com/characters/d7a3e641-7ee7-4c36-9efd-72d46e80b7b0" target="_blank" rel="noopener" style="--c1:#DCEEF8;--c2:#9CCBE6;--cx:40%;--cy:50%">
+<div class="wc-pic"><img class="wc-img" src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/bbc7cebe-1d96-4aa5-9088-37ae5fcb6601?v=428635" alt="" loading="lazy" style="object-position:center 45%"><span class="wc-genre">SCI-FI / MEDICAL</span><span class="wc-dest">DESTINATION 06</span>
+<div class="stamp-wrap"><div class="stamp"><div class="stamp-in"><b>06</b><small>SUZUKA</small></div></div></div><svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="pmw06" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="10.5" letter-spacing="2.2" fill="currentColor"><textPath href="#pmw06">SUZUKA POST · DESTINATION · </textPath></text><text x="60" y="66" text-anchor="middle" font-size="17" fill="currentColor">06</text></svg></div>
+<div class="wc-body"><div class="wc-name" data-i18n="w06n">ヒートロット（発情症候群）</div><p class="wc-desc" data-i18n="w06d">2040年代の惑星エルデ。体内で「発情細胞」が増殖する原因不明の疾患――通称ヒートロット。唯一の治療法は、極めて希少な「抗体キャリア」から抗体因子を受け取ること。</p>
+<div class="wc-res"><small>TAGS</small><ul><li data-i18n="w06t0">SF</li><li data-i18n="w06t1">奇病</li><li data-i18n="w06t2">発情</li></ul></div><div class="wc-foot">OPEN SERIES →</div></div></a><div class="wc" id="w07" style="--c1:#EBF3E2;--c2:#C2D9A9;--cx:25%;--cy:75%">
+<div class="wc-pic"><img class="wc-img" src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/1bcddb7c-e12e-466c-86f7-832eb9097e0f?v=eb8e41" alt="" loading="lazy" style="object-position:center 40%"><span class="wc-genre">FANTASY / MARRIAGE</span><span class="wc-dest">DESTINATION 07</span>
+<div class="stamp-wrap"><div class="stamp"><div class="stamp-in"><b>07</b><small>SUZUKA</small></div></div></div><svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="pmw07" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="10.5" letter-spacing="2.2" fill="currentColor"><textPath href="#pmw07">SUZUKA POST · DESTINATION · </textPath></text><text x="60" y="66" text-anchor="middle" font-size="17" fill="currentColor">07</text></svg></div>
+<div class="wc-body"><div class="wc-name" data-i18n="w07n">MARCHÉ.MARIAGE</div><p class="wc-desc" data-i18n="w07d">魔法発達から数千年が経った大陸。婚姻は大陸魔法評議会の管轄下にあり、評議会公認の婚姻マーケットを介した売買、マッチング、そして夫婦関係改善プログラムまでが制度として整えられている。</p>
+<div class="wc-res"><small>TAGS</small><ul><li data-i18n="w07t0">ファンタジー</li><li data-i18n="w07t1">婚姻マーケット</li><li data-i18n="w07t2">マッチング</li></ul></div><div class="wc-foot off">SERIES</div></div></div><div class="wc" id="w08" style="--c1:#E2EEDC;--c2:#A7C996;--cx:75%;--cy:25%">
+<div class="wc-pic"><img class="wc-img" src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/9a62eb75-d341-44ba-9b09-4ffb4f65f67a?v=b0c091" alt="" loading="lazy" style="object-position:center 52%"><span class="wc-genre">FANTASY / BEASTMEN</span><span class="wc-dest">DESTINATION 08</span>
+<div class="stamp-wrap"><div class="stamp"><div class="stamp-in"><b>08</b><small>SUZUKA</small></div></div></div><svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="pmw08" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="10.5" letter-spacing="2.2" fill="currentColor"><textPath href="#pmw08">SUZUKA POST · DESTINATION · </textPath></text><text x="60" y="66" text-anchor="middle" font-size="17" fill="currentColor">08</text></svg></div>
+<div class="wc-body"><div class="wc-name" data-i18n="w08n">カラフ大森林</div><p class="wc-desc" data-i18n="w08d">肉食獣人ドラウ族が数百年にわたり治める深い森。服属する部族は年貢を納めて不可侵を保証され、部族同士の揉め事は森主への陳情によって裁かれる。</p>
+<div class="wc-res"><small>TAGS</small><ul><li data-i18n="w08t0">獣人</li><li data-i18n="w08t1">森</li><li data-i18n="w08t2">部族</li></ul></div><div class="wc-foot off">SERIES</div></div></div><div class="wc" id="w09" style="--c1:#E4ECEA;--c2:#AAC0BB;--cx:50%;--cy:40%">
+<div class="wc-pic"><img class="wc-img" src="https://cdn.caveduck.io/cdn-cgi/image/dpr=1.5,f=auto,w=800/charim/3ab048f7-40cd-4b7e-9560-5d29cce1fa78?v=ee8a63" alt="" loading="lazy" style="object-position:center 50%"><span class="wc-genre">MODERN / MAFIA</span><span class="wc-dest">DESTINATION 09</span>
+<div class="stamp-wrap"><div class="stamp"><div class="stamp-in"><b>09</b><small>SUZUKA</small></div></div></div><svg class="postmark" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="pmw09" d="M60,60 m-41,0 a41,41 0 1,1 82,0 a41,41 0 1,1 -82,0"/></defs><circle cx="60" cy="60" r="54" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="10.5" letter-spacing="2.2" fill="currentColor"><textPath href="#pmw09">SUZUKA POST · DESTINATION · </textPath></text><text x="60" y="66" text-anchor="middle" font-size="17" fill="currentColor">09</text></svg></div>
+<div class="wc-body"><div class="wc-name" data-i18n="w09n">中華マフィアシリーズ</div><p class="wc-desc" data-i18n="w09d">現代中国の裏社会。表の顔を持つ組織と、そこに生きる男たち。</p>
+<div class="wc-res"><small>TAGS</small><ul><li data-i18n="w09t0">現代</li><li data-i18n="w09t1">マフィア</li><li data-i18n="w09t2">裏社会</li></ul></div><div class="wc-foot off">SERIES</div></div></div><div class="wc soon" id="w10"><div class="wc-pic"><div class="unch"><span>UNCHARTED</span></div><span class="wc-dest">DESTINATION 10</span></div>
+<div class="wc-body"><div class="wc-name" data-i18n="w10n">未踏の地</div><div class="wc-en">Coming soon</div></div></div></div></div></section><div class="air"></div><footer><div class="term"><small>TERMINAL</small><b>suzuka<i>.</i></b><div>END OF LINE</div></div></footer><script>
+(function(){
+var T={"ja": {"pc": "郵便はがき", "s1": "活動場所", "s2": "世界観", "tk": "乗車券", "dep": "発", "arr": "行", "w10n": "未踏の地", "w10s": "未踏", "w01s": "大魔海", "w01n": "大魔海（グラン・メール）", "w01d": "カーディア大陸の法も国境も届かない無法の海。魔法なきこの世界で頼れるのは、己の武力と船の性能だけ。逃げ延びた罪人、夢想家、亡霊たちが、それぞれの船に居場所を見出している。", "w01t0": "海賊", "w01t1": "無法の海", "w01t2": "船", "w02s": "ヴァルトライヒ", "w02n": "ヴァルトライヒ軍", "w02d": "ヒート期を短縮し、兵の継続戦闘力を担保するため、番制度が軍規に追加された軍。", "w02t0": "オメガバース", "w02t1": "軍隊", "w02t2": "番制度", "w03s": "ASCEND", "w03n": "THE ASCEND TOWER", "w03d": "成功者だけが住むことを許された、天空の超高級タワー『ザ・アセンド』。種族は問われない。求められるのは莫大な資産だけ。欲望と格差が交差する、閉ざされた楽園。", "w03t0": "現代", "w03t1": "超富裕層", "w03t2": "欲望と格差", "w04s": "野生回帰", "w04n": "野生回帰プロジェクト", "w04d": "準人類（獣人）たちに権利を。人に飼われ支配される彼らに自由を――という運動が高まりを見せている、現代風社会で生きる準人類と人間のあれこれ。", "w04t0": "現代", "w04t1": "獣人", "w04t2": "人と獣人", "w05s": "ゾル・ヴァルガ", "w05n": "魔界商都『ゾル・ヴァルガ』の生体市場", "w05d": "魔界の中層に位置する巨大な商業都市。薄暗い紫色の空に覆われ、魔力を含んだ雨が降る街は、魔界全土からあらゆる「商品」が集まる欲望の掃き溜めであり、最高級の贅沢品が取引される場所でもある。", "w05t0": "魔界", "w05t1": "ダークファンタジー", "w05t2": "生体市場", "w06s": "ヒートロット", "w06n": "ヒートロット（発情症候群）", "w06d": "2040年代の惑星エルデ。体内で「発情細胞」が増殖する原因不明の疾患――通称ヒートロット。唯一の治療法は、極めて希少な「抗体キャリア」から抗体因子を受け取ること。", "w06t0": "SF", "w06t1": "奇病", "w06t2": "発情", "w07s": "MARCHÉ", "w07n": "MARCHÉ.MARIAGE", "w07d": "魔法発達から数千年が経った大陸。婚姻は大陸魔法評議会の管轄下にあり、評議会公認の婚姻マーケットを介した売買、マッチング、そして夫婦関係改善プログラムまでが制度として整えられている。", "w07t0": "ファンタジー", "w07t1": "婚姻マーケット", "w07t2": "マッチング", "w08s": "カラフ大森林", "w08n": "カラフ大森林", "w08d": "肉食獣人ドラウ族が数百年にわたり治める深い森。服属する部族は年貢を納めて不可侵を保証され、部族同士の揉め事は森主への陳情によって裁かれる。", "w08t0": "獣人", "w08t1": "森", "w08t2": "部族", "w09s": "中華マフィア", "w09n": "中華マフィアシリーズ", "w09d": "現代中国の裏社会。表の顔を持つ組織と、そこに生きる男たち。", "w09t0": "現代", "w09t1": "マフィア", "w09t2": "裏社会"}, "ko": {"pc": "우편엽서", "s1": "활동 장소", "s2": "세계관", "tk": "승차권", "dep": "발", "arr": "행", "w10n": "미지의 땅", "w10s": "미지", "w01s": "대마해", "w01n": "대마해(그랑 메르)", "w01d": "카디아 대륙의 법도 국경도 닿지 않는 무법의 바다. 마법이 없는 이 세계에서 믿을 것은 자신의 무력과 배의 성능뿐. 도망쳐 온 죄인, 몽상가, 망령들이 저마다의 배에서 있을 곳을 찾아낸다.", "w01t0": "해적", "w01t1": "무법의 바다", "w01t2": "배", "w02s": "발트라이히", "w02n": "발트라이히군", "w02d": "히트기를 단축하고 병사의 지속 전투력을 담보하기 위해, 짝(番) 제도가 군규에 추가된 군대.", "w02t0": "오메가버스", "w02t1": "군대", "w02t2": "짝(番) 제도", "w03s": "ASCEND", "w03n": "THE ASCEND TOWER", "w03d": "성공한 자만이 살 수 있는 하늘 위의 초호화 타워 『디 어센드』. 종족은 묻지 않는다. 요구되는 것은 막대한 자산뿐. 욕망과 격차가 교차하는 닫힌 낙원.", "w03t0": "현대", "w03t1": "초부유층", "w03t2": "욕망과 격차", "w04s": "야생 회귀", "w04n": "야생 회귀 프로젝트", "w04d": "준인류(수인)에게 권리를. 인간에게 길러지고 지배당하는 그들에게 자유를——그런 운동이 고조되고 있는 현대풍 사회에서 살아가는 준인류와 인간의 이런저런 이야기.", "w04t0": "현대", "w04t1": "수인", "w04t2": "인간과 수인", "w05s": "졸 발가", "w05n": "마계 상도 『졸 발가』의 생체 시장", "w05d": "마계 중층에 위치한 거대한 상업 도시. 어두운 보랏빛 하늘에 덮여 마력을 머금은 비가 내리는 이 거리는, 마계 전역에서 온갖 '상품'이 모여드는 욕망의 소굴이자 최고급 사치품이 거래되는 곳이기도 하다.", "w05t0": "마계", "w05t1": "다크 판타지", "w05t2": "생체 시장", "w06s": "히트로트", "w06n": "히트로트(발정 증후군)", "w06d": "2040년대의 행성 엘데. 체내에서 '발정 세포'가 증식하는 원인 불명의 질환——통칭 히트로트. 유일한 치료법은 극히 희귀한 '항체 캐리어'에게서 항체 인자를 받는 것.", "w06t0": "SF", "w06t1": "기이한 병", "w06t2": "발정", "w07s": "MARCHÉ", "w07n": "MARCHÉ.MARIAGE", "w07d": "마법이 발달한 지 수천 년이 지난 대륙. 혼인은 대륙 마법 평의회의 관할 아래에 있으며, 평의회가 공인한 혼인 마켓을 통한 매매와 매칭, 그리고 부부 관계 개선 프로그램까지 제도로 갖추어져 있다.", "w07t0": "판타지", "w07t1": "혼인 마켓", "w07t2": "매칭", "w08s": "카라프 대삼림", "w08n": "카라프 대삼림", "w08d": "육식 수인 드라우족이 수백 년에 걸쳐 다스려 온 깊은 숲. 복속한 부족은 연공을 바쳐 불가침을 보장받고, 부족 간의 분쟁은 숲의 주인에게 올리는 진정으로 심판받는다.", "w08t0": "수인", "w08t1": "숲", "w08t2": "부족", "w09s": "중화 마피아", "w09n": "중화 마피아 시리즈", "w09d": "현대 중국의 뒷세계. 표면의 얼굴을 가진 조직과, 그곳에 사는 남자들.", "w09t0": "현대", "w09t1": "마피아", "w09t2": "뒷세계"}, "zh": {"pc": "明信片", "s1": "活動平台", "s2": "世界觀", "tk": "乘車券", "dep": "發", "arr": "方向", "w10n": "未知之地", "w10s": "未知", "w01s": "大魔海", "w01n": "大魔海（格蘭梅爾）", "w01d": "卡迪亞大陸的法律與國界皆無法觸及的無法之海。在這個沒有魔法的世界裡，能依靠的只有自身的武力與船隻的性能。逃亡的罪人、夢想家與亡靈，各自在船上找到了容身之處。", "w01t0": "海盜", "w01t1": "無法之海", "w01t2": "船", "w02s": "瓦爾特萊希", "w02n": "瓦爾特萊希軍", "w02d": "為了縮短發情期、確保士兵的持續戰鬥力，而將「番」制度納入軍規的軍隊。", "w02t0": "ABO", "w02t1": "軍隊", "w02t2": "伴侶制度", "w03s": "ASCEND", "w03n": "THE ASCEND TOWER", "w03d": "只有成功者才被允許入住的天空超高級大樓『The Ascend』。不問種族，只要求龐大的資產。慾望與差距交錯的封閉樂園。", "w03t0": "現代", "w03t1": "超級富豪", "w03t2": "慾望與階級", "w04s": "野生回歸", "w04n": "野生回歸計畫", "w04d": "給準人類（獸人）權利。給被人類飼養、支配的他們自由——在這樣的運動日漸高漲的現代風社會中，準人類與人類之間的種種故事。", "w04t0": "現代", "w04t1": "獸人", "w04t2": "人類與獸人", "w05s": "佐爾瓦爾加", "w05n": "魔界商都『佐爾・瓦爾加』的生體市場", "w05d": "位於魔界中層的巨大商業都市。籠罩在昏暗的紫色天空下、降著蘊含魔力之雨的這座城市，是魔界各地一切「商品」匯聚的慾望淵藪，同時也是最高級奢侈品交易之地。", "w05t0": "魔界", "w05t1": "暗黑奇幻", "w05t2": "生體市場", "w06s": "希特羅特", "w06n": "希特羅特（發情症候群）", "w06d": "2040年代的行星艾爾德。體內「發情細胞」不斷增殖的不明原因疾病——通稱希特羅特。唯一的治療方法，是從極為稀少的「抗體帶原者」身上取得抗體因子。", "w06t0": "科幻", "w06t1": "怪病", "w06t2": "發情", "w07s": "MARCHÉ", "w07n": "MARCHÉ.MARIAGE", "w07d": "魔法發展數千年後的大陸。婚姻歸大陸魔法評議會管轄，透過評議會認可的婚姻市場進行的買賣、配對，乃至夫妻關係改善計畫，都已制度化。", "w07t0": "奇幻", "w07t1": "婚姻市場", "w07t2": "配對", "w08s": "卡拉夫大森林", "w08n": "卡拉夫大森林", "w08d": "由肉食獸人德勞族統治數百年的幽深森林。臣服的部族繳納年貢以換取不受侵犯的保障，部族之間的紛爭，則透過向森主陳情來裁決。", "w08t0": "獸人", "w08t1": "森林", "w08t2": "部族", "w09s": "華人黑幫", "w09n": "華人黑幫系列", "w09d": "現代中國的地下社會。擁有表面門面的組織，以及身處其中的男人們。", "w09t0": "現代", "w09t1": "黑幫", "w09t2": "地下社會"}, "en": {"pc": "MAIL", "s1": "WHERE TO FIND ME", "s2": "WORLDS", "tk": "TICKET", "dep": "DEP.", "arr": "BOUND", "w10n": "Uncharted Land", "w10s": "Uncharted", "w01s": "Grand Mer", "w01n": "Pirates of Grand Mer", "w01d": "A lawless sea beyond the reach of the laws and borders of the Cardia continent. In this world without magic, all you can rely on is your own strength and the speed of your ship. Fugitives, dreamers and ghosts each find a place to belong aboard their ships.", "w01t0": "Pirates", "w01t1": "Lawless Seas", "w01t2": "Ships", "w02s": "Valtreich", "w02n": "Valtreich Chronik", "w02d": "An army that wrote a mate-bonding system into its regulations, to shorten heats and secure its soldiers' sustained combat strength.", "w02t0": "Omegaverse", "w02t1": "Military", "w02t2": "Bonding System", "w03s": "ASCEND", "w03n": "THE ASCEND TOWER", "w03d": "\"The Ascend\", a luxury tower in the sky where only the successful may live. Race does not matter; only vast wealth is required. A closed paradise where desire and inequality intersect.", "w03t0": "Modern", "w03t1": "Ultra-Rich", "w03t2": "Desire & Inequality", "w04s": "Return to Wild", "w04n": "Return to the Wild Project", "w04d": "Rights for the semi-humans (beastfolk). Freedom for those kept and ruled by humans. Stories of semi-humans and humans living in a modern-style society where this movement is gaining momentum.", "w04t0": "Modern", "w04t1": "Beastfolk", "w04t2": "Humans & Beastfolk", "w05s": "Zol-Varga", "w05n": "The Living Market of Zol-Varga", "w05d": "A vast trading city in the middle layer of the Demon Realm. Under a dim purple sky and rain laced with magic, it is a sink of desire where every kind of \"merchandise\" from across the realm gathers, and where the finest luxuries change hands.", "w05t0": "Demon Realm", "w05t1": "Dark Fantasy", "w05t2": "Living Market", "w06s": "Heatrot", "w06n": "Heatrot (Heat Syndrome)", "w06d": "Planet Erde, the 2040s. An illness of unknown cause in which \"heat cells\" multiply inside the body, commonly called Heatrot. The only treatment is to receive antibody factors from an extremely rare \"antibody carrier\".", "w06t0": "Sci-Fi", "w06t1": "Mystery Illness", "w06t2": "Heat", "w07s": "MARCHÉ", "w07n": "MARCHÉ.MARIAGE", "w07d": "A continent thousands of years after magic flourished. Marriage falls under the Continental Magic Council, and everything from buying and matchmaking on the Council-certified marriage market to a marital improvement program is built into the system.", "w07t0": "Fantasy", "w07t1": "Marriage Market", "w07t2": "Matchmaking", "w08s": "Karaf Forest", "w08n": "The Great Karaf Forest", "w08d": "A deep forest ruled for centuries by the carnivorous beastfolk of the Drau clan. Subject tribes pay tribute in exchange for guaranteed safety, and disputes between tribes are judged by petition to the Forest Lord.", "w08t0": "Beastfolk", "w08t1": "Forest", "w08t2": "Tribes", "w09s": "Mafia", "w09n": "The Chinese Mafia Series", "w09d": "The underworld of modern China. Organizations with a respectable front, and the men who live inside them.", "w09t0": "Modern", "w09t1": "Mafia", "w09t2": "Underworld"}};
+function setLang(l){
+  if(!T[l])l='ja';
+  document.documentElement.lang=l==='zh'?'zh-Hant':l;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){var v=T[l][el.getAttribute('data-i18n')];if(v!==undefined)el.textContent=v;});
+  document.querySelectorAll('.lang button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-l')===l);});
+  try{localStorage.setItem('suzuka-lang',l);}catch(e){}
+}
+var saved=null;try{saved=localStorage.getItem('suzuka-lang');}catch(e){}
+var nv=(navigator.language||'ja').toLowerCase();
+var guess=nv.indexOf('ko')===0?'ko':nv.indexOf('zh')===0?'zh':nv.indexOf('ja')===0?'ja':'en';
+setLang(saved||guess);
+document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-l'));});});
+document.addEventListener('contextmenu',function(e){e.preventDefault();});
+document.addEventListener('dragstart',function(e){if(e.target.tagName==='IMG')e.preventDefault();});
+})();
 </script>
+<div class="toast" id="toast"></div>
+<script>function cp(c){navigator.clipboard.writeText(c).then(function(){var t=document.getElementById('toast');t.textContent=c+' — COPIED';t.classList.add('on');setTimeout(function(){t.classList.remove('on')},1500)})}</script>
 </body>
 </html>
